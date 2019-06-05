@@ -3,12 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "bulma": "^0.7.4",
+    "bulma-extensions": "^6.2.5",
+    "font-awesome": "^4.7.0",
+    "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-hooks": "^1.0.1",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.1",
+    "validator": "^10.11.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -16,6 +24,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "http://localhost:1337/v1",
   "browserslist": {
     "production": [
       ">0.2%",

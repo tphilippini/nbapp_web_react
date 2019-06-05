@@ -1,0 +1,28 @@
+@import-normalize; /* bring in normalize.css styles 
+https://facebook.github.io/create-react-app/docs/adding-css-reset */
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+audio,
+video {
+  display: inline-block;
+}
+
+/**
+ * Remove the border on images inside links in IE 10-.
+ */
+
+img {
+  border-style: none;
+}
+
+// Removing the dotted outline
+a:hover, a:active, a:focus {
+  outline: 0;
+}
+
+::-moz-focus-inner { 
+  border: 0; 
+}

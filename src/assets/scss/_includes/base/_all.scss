@@ -1,0 +1,63 @@
+/**
+ * @author Thomas Philippini <thomas.philippini@gmail.com>
+ *
+ * Include our Sass files
+ */
+
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css?family=Muli');
+@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/functions";
+
+// Colors
+// $theme: #ff3860;
+// $theme: #05d5ff;
+$theme: #5f45bb;
+
+// $blue: #72d0eb;
+// $pink: #ffb3b3;
+// $green-light: #19d998;
+// $green: #8ED1CD;
+// $purple: #5f45bb;
+// $pink-invert: #fff;
+// $green-invert: #fff;
+// $orange-dark: #f96854;
+
+$family-serif: "Muli", serif;
+
+$info: $theme;
+// $primary: $theme;
+// $success: $green-light;
+// $primary-invert: $pink-invert;
+// $success-invert: $green-invert;
+// $warning: $orange-dark;
+// Use the new serif family
+$family-primary: $family-serif;
+// link
+$link: $info;
+$link-visited: $grey-darker;
+
+$input-shadow: 0;
+$input-focus-box-shadow-size: 0;
+$button-focus-box-shadow-size: 0;
+
+@import "~bulma/sass/utilities/derived-variables.sass";
+@import "~bulma/bulma";
+
+/* Variables */
+// @import "assets/scss/_includes/helpers/variable";
+
+/* Base */
+@import "assets/scss/_includes/base/general";
+
+/* Helpers */
+// @import "assets/scss/_includes/helpers/function";
+
+/* Layouts */
+@import "assets/scss/_includes/layouts/hero";
+
+/* Components */
+@import "assets/scss/_includes/components/button";
+@import "assets/scss/_includes/components/form";
+@import "assets/scss/_includes/components/navbar";
