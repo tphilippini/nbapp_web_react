@@ -5,12 +5,17 @@ import { BrowserRouter, Route } from "react-router-dom";
 import "font-awesome/css/font-awesome.min.css";
 
 import App from "./components/app";
+import LoadingProvider from "./providers/loading.provider";
+import Spinner from "./components/helpers/spinner.helper";
 import * as serviceWorker from "./serviceWorker";
 import "./index.scss";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Route component={App} />
+    <LoadingProvider>
+      <Spinner />
+      <Route component={App} />
+    </LoadingProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );

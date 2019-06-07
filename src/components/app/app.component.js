@@ -1,7 +1,8 @@
-import React, { useState, useContext, useReducer, useEffect } from "react";
+import React, { useContext, useReducer, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import AuthContext from "../../contexts/auth.context";
+import LoadingContext from "../../contexts/loading.context";
 import UserReducer from "../../reducers/user.reducer";
 
 import Header from "../navigation/header.component";
@@ -20,22 +21,22 @@ const App = () => {
   const initialState = useContext(AuthContext);
   const [{ user }, dispatch] = useReducer(UserReducer, initialState);
 
-  const [loading, setLoading] = useState(false);
+  const { loading, hideLoading } = useContext(LoadingContext);
 
   useEffect(() => {
     if (localStorage.USER_DATA) {
       setAuthorizationHeader(localStorage.USER_DATA);
-      fetchCurrentUser(dispatch).then(() => setLoading(true));
-    } else {
-      fetchCurrentUser(dispatch).then(() => setLoading(true));
     }
+
+    fetchCurrentUser(dispatch).then(() => {
+      hideLoading();
+    });
+    // eslint-disable-next-line
   }, []);
 
   return (
     <React.Fragment>
-      {!loading ? (
-        <div>Hello loading</div>
-      ) : (
+      {loading && (
         <AuthContext.Provider value={{ user, dispatch }}>
           <Header />
           <Switch>
