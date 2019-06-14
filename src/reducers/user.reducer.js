@@ -5,16 +5,16 @@ import {
   USER_UPDATED
 } from "../actions/types.action";
 
-const UserReducer = (state = { loaded: false }, action = {}) => {
+const UserReducer = (state = {}, action = {}) => {
   switch (action.type) {
     case USER_LOGGED_IN:
       return { user: action.user };
     case USER_FETCHED:
-      return { ...state, user: action.user, loaded: true };
+      return { ...state, user: action.user };
     case USER_UPDATED:
-      return { ...state, user: action.user, loaded: true };
+      return { ...state, user: action.user };
     case USER_LOGGED_OUT:
-      return { loaded: true };
+      return {};
     default:
       return state;
   }

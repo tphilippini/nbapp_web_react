@@ -15,7 +15,7 @@ export const login = (credentials, dispatch) =>
   api.user.login(credentials).then(result => {
     localStorage.USER_DATA = result.access_token;
     setAuthorizationHeader(localStorage.USER_DATA);
-    dispatch(userLoggedIn({ email: result.email, loaded: true }));
+    dispatch(userLoggedIn({ email: result.email, alias: result.alias }));
   });
 
 export const logout = dispatch => {

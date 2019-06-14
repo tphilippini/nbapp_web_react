@@ -26,22 +26,31 @@ const Header = () => {
             <div className="navbar-menu">
               {user && user.email ? (
                 <div className="navbar-end">
-                  <div className="navbar-item">{user.email}</div>
+                  <div className="navbar-item">Bonjour {user.alias}</div>
                   <div className="navbar-item">
                     <div
-                      aria-hidden
                       className="navbar-item"
                       onClick={() => logout(dispatch)}
                     >
-                      Déconnexion
+                      <button className="button is-info">
+                        <span>Déconnexion</span>
+                        <span className="icon is-small">
+                          <i className="fa fa-sign-out" />
+                        </span>
+                      </button>
                     </div>
                   </div>
                 </div>
               ) : (
                 <div className="navbar-end">
-                  <Link className="navbar-item" to="/login">
-                    Connexion
-                  </Link>
+                  <div className="navbar-item">
+                    <Link className="button is-info" to="/login">
+                      <span>Connexion</span>
+                      <span className="icon is-small">
+                        <i className="fa fa-sign-in" />
+                      </span>
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
