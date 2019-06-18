@@ -1,20 +1,13 @@
-.navbar .icon, .navbar .navbar-item .is-flags {
-  color: #fff;
-}
-
 .navbar .navbar-item,
 .navbar .icon, .navbar .navbar-item .is-flags {
   cursor: pointer;
 }
 
-.navbar .navbar-item .is-flags {
-  margin-top: 7px;
-  
-  &:not(:last-child) {
-    margin-right: 8px;
-  }
+.navbar .navbar-item.is-alias {
+  text-transform: capitalize;
 }
 
-.navbar .navbar-item.is-username {
-  text-transform: capitalize;
+.navbar .navbar-item .select:not(.is-multiple):not(.is-loading)::after {
+  border-color: #b5b5b5;
+  border-width: 2px;
 }

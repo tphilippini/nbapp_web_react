@@ -23,6 +23,14 @@ a:hover, a:active, a:focus {
   outline: 0;
 }
 
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+option:not(:checked) {
+  color: black; /* prevent <option>s from becoming transparent as well */
+}
+
 ::-moz-focus-inner { 
   border: 0; 
 }

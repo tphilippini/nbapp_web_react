@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 import AuthContext from "../../contexts/auth.context";
+import LangSelect from "../helpers/lang.helpers";
 import { logout } from "../../actions/auth.action";
 
 const Header = () => {
@@ -14,19 +16,33 @@ const Header = () => {
             <div className="navbar-brand">
               {user && user.email ? (
                 <Link className="navbar-item" to="/dashboard">
-                  App
+                  <FormattedMessage id="nav.dashboard" default="Dashboard" />
                 </Link>
               ) : (
                 <Link className="navbar-item" to="/">
-                  App
+                  <FormattedMessage id="nav.dashboard" default="Dashboard" />
                 </Link>
               )}
             </div>
 
             <div className="navbar-menu">
-              {user && user.email ? (
-                <div className="navbar-end">
-                  <div className="navbar-item">Bonjour {user.alias}</div>
+              {user && user.email && (
+                <div className="navbar-start">
+                  <div className="navbar-item is-alias">
+                    <FormattedMessage
+                      id="nav.hello"
+                      default={`Hello {alias}`}
+                      values={{ alias: user.alias }}
+                    />
+                  </div>
+                </div>
+              )}
+
+              <div className="navbar-end">
+                <div className="navbar-item">
+                  <LangSelect />
+                </div>
+                {user && user.email ? (
                   <div className="navbar-item">
                     <div
                       className="navbar-item"
@@ -40,9 +56,7 @@ const Header = () => {
                       </button>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <div className="navbar-end">
+                ) : (
                   <div className="navbar-item">
                     <Link className="button is-info" to="/login">
                       <span>Connexion</span>
@@ -51,8 +65,8 @@ const Header = () => {
                       </span>
                     </Link>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </nav>
