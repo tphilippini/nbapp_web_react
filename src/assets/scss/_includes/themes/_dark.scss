@@ -1,0 +1,38 @@
+
+.dark {
+  @each $name, $pair in $colors {
+    $color: nth($pair, 1);
+    $color-invert: nth($pair, 2);
+
+    .hero,
+    .navbar {
+      &.is-transparent {
+        background-color: transparent;
+      }
+
+      &.is-#{$name} {
+        background-color: $color-invert;
+        color: $color;
+
+        .navbar-item,
+        .navbar-link {
+          color: $color;
+
+          &.is-active {
+            color: rgba($color, 0.7);
+          }
+        }
+
+        .navbar-burger {
+          span {
+            background-color: $color;
+          }
+        }
+
+        .title {
+          color: $color;
+        }
+      }
+    }
+  }  
+}

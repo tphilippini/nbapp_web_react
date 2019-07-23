@@ -1,7 +1,8 @@
 import { createContext } from "react";
 
 const LocaleContext = createContext({
-  lang: "fr"
+  lang: "fr",
+  theme: "light"
 });
 
 export default LocaleContext;

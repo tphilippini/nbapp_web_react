@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import AuthContext from "../../contexts/auth.context";
+import ThemeSelect from "../helpers/theme.helpers";
 import LangSelect from "../helpers/lang.helpers";
 import { logout } from "../../actions/auth.action";
 
@@ -39,6 +40,9 @@ const Header = () => {
               )}
 
               <div className="navbar-end">
+                {/* <div className="navbar-item">
+                  <ThemeSelect />
+                </div> */}
                 <div className="navbar-item">
                   <LangSelect />
                 </div>

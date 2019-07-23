@@ -1,18 +1,18 @@
 import React from "react";
 
-import LangProvider from "./lang.provider";
+import LocaleProvider from "./locale.provider";
 import LoadingProvider from "./loading.provider";
 import AuthProvider from "./auth.provider";
 import Spinner from "../components/helpers/spinner.helper";
 
 const Store = ({ children }) => {
   return (
-    <LangProvider>
+    <LocaleProvider>
       <LoadingProvider>
         <Spinner />
         <AuthProvider>{children}</AuthProvider>
       </LoadingProvider>
-    </LangProvider>
+    </LocaleProvider>
   );
 };
 

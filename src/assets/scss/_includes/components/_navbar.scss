@@ -8,6 +8,23 @@
 }
 
 .navbar .navbar-item .select:not(.is-multiple):not(.is-loading)::after {
-  border-color: #b5b5b5;
+  border-color: $theme;
   border-width: 2px;
+}
+
+.navbar .navbar-item .select select {
+	&:focus,
+	&.is-focused,
+	&:active,
+	&.is-active {
+		border-color: $theme;
+	}
+}
+
+.navbar.is-light .navbar-brand > a.navbar-item:hover,
+.navbar.is-light .navbar-brand > a.navbar-item.is-active,
+.navbar.is-light .navbar-brand .navbar-link:hover,
+.navbar.is-light .navbar-brand .navbar-link.is-active {
+	background-color: transparent;
+	color: inherit;
 }

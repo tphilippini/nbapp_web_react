@@ -2,9 +2,13 @@ import React from "react";
 
 const Dashboard = () => {
   return (
-    <div className="container">
-      <h1>Welcome on dashboard page</h1>
-    </div>
+    <section className="hero is-light is-fullheight-with-navbar">
+      <div className="hero-body">
+        <div className="container">
+          <p className="title">Welcome on dashboard page</p>
+        </div>
+      </div>
+    </section>
   );
 };
 

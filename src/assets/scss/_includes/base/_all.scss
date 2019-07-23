@@ -24,6 +24,16 @@ $theme: #5f45bb;
 // $green-invert: #fff;
 // $orange-dark: #f96854;
 
+$grey-darker:  #1f2d3b;
+$grey-dark:    #2B3E50;
+$grey:         #4E5D6C;
+$grey-light:   #8694a4;
+$grey-lighter: #dee5ed;
+
+$dark: darken($grey-darker, 3);
+$light: $white;
+$light-invert: $dark;
+
 $family-serif: "Muli", serif;
 
 $info: $theme;
@@ -41,6 +51,16 @@ $link-visited: $grey-darker;
 $input-shadow: 0;
 $input-focus-box-shadow-size: 0;
 $button-focus-box-shadow-size: 0;
+
+
+// @media (prefers-color-scheme: light) {
+//   $body-background-color: $white;
+// }
+
+// @media (prefers-color-scheme: dark) {
+//   $body-background-color: $grey-darker;
+// }
+
 
 @import "~bulma/sass/utilities/derived-variables.sass";
 @import "~bulma/bulma";
@@ -61,3 +81,6 @@ $button-focus-box-shadow-size: 0;
 @import "assets/scss/_includes/components/button";
 @import "assets/scss/_includes/components/form";
 @import "assets/scss/_includes/components/navbar";
+
+/* Themes */
+@import "assets/scss/_includes/themes/dark";

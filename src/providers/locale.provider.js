@@ -6,11 +6,11 @@ import LocaleContext from "../contexts/locale.context";
 import LocaleReducer from "../reducers/locale.reducer";
 import i18n from "../utils/i18n";
 
-import { setLocalei18n } from "../actions/locale.action";
+import { setLocalei18n, setTheme } from "../actions/locale.action";
 
-const LangProvider = ({ children }) => {
+const LocaleProvider = ({ children }) => {
   const initialState = useContext(LocaleContext);
-  const [{ lang }, dispatch] = useReducer(LocaleReducer, initialState);
+  const [{ lang, theme }, dispatch] = useReducer(LocaleReducer, initialState);
 
   addLocaleData(en);
   addLocaleData(fr);
@@ -19,16 +19,20 @@ const LangProvider = ({ children }) => {
     if (localStorage.USER_LANG) {
       setLocalei18n(localStorage.USER_LANG, dispatch);
     }
+
+    if (localStorage.USER_THEME) {
+      setTheme(localStorage.USER_THEME, dispatch);
+    }
     // eslint-disable-next-line
   }, []);
 
   return (
-    <IntlProvider locale={lang} messages={i18n[lang]}>
-      <LocaleContext.Provider value={{ lang, dispatch }}>
-        {children}
+    <IntlProvider locale="fr" messages={i18n[lang]}>
+      <LocaleContext.Provider value={{ lang, theme, dispatch }}>
+        <div className={theme}>{children}</div>
       </LocaleContext.Provider>
     </IntlProvider>
   );
 };
 
-export default LangProvider;
+export default LocaleProvider;
