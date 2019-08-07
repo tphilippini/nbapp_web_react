@@ -16,5 +16,11 @@ export const signup = (data, dispatch) =>
 export const fetchCurrentUser = dispatch =>
   api.user.fetchCurrentUser().then(result => {
     if (result.email && result.alias)
-      dispatch(userFetched({ email: result.email, alias: result.alias }));
+      dispatch(userFetched(result));
+  });
+
+export const patch = (data, dispatch) =>
+  api.user.patch(data).then((result) => {
+    if (result.email && result.alias)
+      dispatch(userFetched(result));
   });

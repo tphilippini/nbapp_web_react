@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import LocaleContext from "../../contexts/locale.context";
 import { setTheme } from "../../actions/locale.action";
 

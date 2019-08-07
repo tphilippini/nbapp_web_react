@@ -8,6 +8,7 @@ import NotFound from "./components/layouts/notfound.component";
 
 import Login from "./components/login/login.component";
 import Signup from "./components/signup/signup.component";
+import Account from "./components/account/account.component";
 
 import UserRoute from "./components/routes/user.route";
 import GuestRoute from "./components/routes/guest.route";
@@ -21,6 +22,7 @@ const App = () => {
         <GuestRoute path="/login" exact component={Login} />
         <GuestRoute path="/signup" exact component={Signup} />
         <UserRoute path="/dashboard" exact component={Dashboard} />
+        <UserRoute path="/account" exact component={Account} />
         <Route component={NotFound} />
       </Switch>
     </React.Fragment>
