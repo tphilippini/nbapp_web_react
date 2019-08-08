@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import AuthContext from "../../contexts/auth.context";
 import { patch } from "../../actions/user.action";
 
-const AccountForm = props => {
+const AccountProfileForm = props => {
   const [user, setUser] = useState({ ...props.user });
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState({});
@@ -21,7 +21,7 @@ const AccountForm = props => {
 		setErrors(err);
     if (Object.keys(err).length === 0) {
 			setLoading(true);
-      patch(user, dispatch)
+      patch(user, "update", dispatch)
         .then(() => {
 					setMessage({text: "Your account has been modified with success", type: 'success'});
 					setTimeout( () => {
@@ -57,6 +57,25 @@ const AccountForm = props => {
           <div className="message-body">{message.text}</div>
         </article>
       )}
+      <div className="field">
+        <label className="label is-small" htmlFor="alias">
+          <FormattedMessage id="account.alias" default="username" />
+        </label>
+        <div className="control">
+          <input
+            id="alias"
+            className={`input ${errors.alias ? "is-danger" : ""}`}
+            autoComplete="off"
+            name="alias"
+            type="text"
+            placeholder="e.g. alexS"
+            value={user.alias}
+            onChange={onChange}
+          />
+        </div>
+        {errors.alias && <p className="help is-danger">{errors.alias}</p>}
+      </div>
+
       <div className="field">
         <label className="label is-small" htmlFor="firstName">
 					<FormattedMessage id="account.firstName" default="firstName" />					
@@ -96,25 +115,6 @@ const AccountForm = props => {
       </div>
 
       <div className="field">
-        <label className="label is-small" htmlFor="alias">
-          Alias
-        </label>
-        <div className="control">
-          <input
-            id="alias"
-            className={`input ${errors.alias ? "is-danger" : ""}`}
-            autoComplete="off"
-            name="alias"
-            type="text"
-            placeholder="e.g. alexS"
-            value={user.alias}
-            onChange={onChange}
-          />
-        </div>
-        {errors.alias && <p className="help is-danger">{errors.alias}</p>}
-      </div>
-
-      <div className="field">
         <label className="label is-small" htmlFor="email">
           Email
         </label>
@@ -135,7 +135,7 @@ const AccountForm = props => {
 
       <div className="columns">
         <div className="column">
-          <div className="field is-pulled-right">
+          <div className="field is-pulled-left">
             <div className="control">
               <button
                 className={`button is-info ${loading ? "is-loading" : ""}`}
@@ -150,4 +150,4 @@ const AccountForm = props => {
   );
 };
 
-export default AccountForm;
+export default AccountProfileForm;

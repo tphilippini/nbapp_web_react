@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <AuthContext.Consumer>
       {({ user }) => (
-        <nav className="navbar is-light is-fixed-top">
+        <nav className="navbar is-light">
           <div className="container">
             <div className="navbar-brand">
               {user && user.email ? (

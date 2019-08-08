@@ -19,8 +19,8 @@ export const fetchCurrentUser = dispatch =>
       dispatch(userFetched(result));
   });
 
-export const patch = (data, dispatch) =>
-  api.user.patch(data).then((result) => {
+export const patch = (data, type, dispatch) =>
+  api.user.patch(data, type).then((result) => {
     if (result.email && result.alias)
       dispatch(userFetched(result));
   });

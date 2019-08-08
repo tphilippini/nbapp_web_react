@@ -2,7 +2,8 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 
 import AuthContext from "../../contexts/auth.context";
-import AccountForm from "./account.form";
+import AccountProfileForm from "./AccountProfile.form";
+import AccountPasswordForm from "./AccountPassword.form";
 
 const Account = props => {
   return (
@@ -11,13 +12,17 @@ const Account = props => {
         <section className="section">
           <div className="container">
             <div className="columns is-centered">
-              <div className="column is-half">
-                <div className="box">
-                  <h1 className="title has-text-centered">
-                    <FormattedMessage id="account.title" default="My account" />
-                  </h1>
-                  <AccountForm user={user} />
-                </div>
+              <div className="column">
+                <h5 className="title">
+                  <FormattedMessage id="account.information_0" default="Basic information" />
+                </h5>
+                <AccountProfileForm user={user} />
+              </div>
+              <div className="column">
+                <h5 className="title">
+                  <FormattedMessage id="account.information_1" default="Change password" />
+                </h5>
+                <AccountPasswordForm user={user} />
               </div>
             </div>
           </div>

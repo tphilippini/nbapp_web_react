@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import Validator from "validator";
+import { FormattedMessage } from "react-intl";
 
 import AuthContext from "../../contexts/auth.context";
 import { signup } from "../../actions/user.action";
@@ -45,7 +46,7 @@ const SignupForm = props => {
       )}
       <div className="field">
         <label className="label is-small" htmlFor="alias">
-          Alias
+          <FormattedMessage id="account.alias" default="username" />
         </label>
         <div className="control">
           <input

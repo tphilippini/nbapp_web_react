@@ -15,11 +15,11 @@ export default {
     signup: user =>
       axios.post("/users", { ...user }).then(res => res.data.data[0]),
 
-    patch: user =>
+    patch: (user, type) =>
       axios
         .patch(`/users/${user.uuid}`, { 
           ...user,
-          grant_type: "update",
+          grant_type: type,
           user_type: "user"
         })
         .then(res => res.data.data[0]),
