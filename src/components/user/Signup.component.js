@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LoginForm from "./login.form";
+import SignupForm from "./Signup.form";
 
-const Login = props => {
+const Signup = props => {
   return (
     <section className="hero">
       <div className="hero-body">
@@ -10,14 +10,14 @@ const Login = props => {
           <div className="columns is-centered">
             <div className="column is-half">
               <div className="box">
-                <h1 className="title has-text-centered">Connexion</h1>
-                <LoginForm {...props} />
+                <h1 className="title has-text-centered">Inscription</h1>
+                <SignupForm {...props} />
               </div>
               <div className="is-pulled-right">
                 <span>
-                  Nouveau ?
-                  <Link className="button is-text" to="/signup">
-                    Inscris-toi
+                  Déjà un compte chez nous ?
+                  <Link className="button is-text" to="/login">
+                    Connecte-toi
                   </Link>
                 </span>
               </div>
@@ -29,4 +29,4 @@ const Login = props => {
   );
 };
 
-export default Login;
+export default Signup;

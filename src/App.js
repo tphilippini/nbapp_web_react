@@ -6,9 +6,11 @@ import Landing from "./components/layouts/landing.component";
 import Dashboard from "./components/layouts/dashboard.component";
 import NotFound from "./components/layouts/notfound.component";
 
-import Login from "./components/login/login.component";
-import Signup from "./components/signup/signup.component";
-import Account from "./components/account/account.component";
+import Login from "./components/user/Login.component";
+import Signup from "./components/user/Signup.component";
+import Account from "./components/user/Account.component";
+import Forgot from "./components/user/Forgot.component";
+import Reset from "./components/user/Reset.component";
 
 import UserRoute from "./components/routes/user.route";
 import GuestRoute from "./components/routes/guest.route";
@@ -20,7 +22,9 @@ const App = () => {
       <Switch>
         <Route path="/" exact component={Landing} />
         <GuestRoute path="/login" exact component={Login} />
+        <GuestRoute path="/forgot" exact component={Forgot} />
         <GuestRoute path="/signup" exact component={Signup} />
+        <GuestRoute path="/reset/:token" exact component={Reset} />
         <UserRoute path="/dashboard" exact component={Dashboard} />
         <UserRoute path="/account" exact component={Account} />
         <Route component={NotFound} />

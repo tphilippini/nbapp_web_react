@@ -21,7 +21,7 @@ const AccountPasswordForm = props => {
     e.preventDefault();
     const err = validate(user);
 		setErrors(err);
-    if (Object.keys(errors).length === 0) {
+    if (Object.keys(err).length === 0) {
 			setLoading(true);
 			patch({ ...props.user, ...user }, "password", dispatch)
 				.then(() => {

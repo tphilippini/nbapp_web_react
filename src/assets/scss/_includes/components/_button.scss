@@ -2,6 +2,6 @@
   background-color: transparent;
 }
 
-.button:focus, .button.is-focused {
+.button:not(.is-text):focus, .button:not(.is-text).is-focused {
   border-color: $theme;
 }

@@ -29,3 +29,9 @@ export const logout = dispatch => {
   setAuthorizationHeader();
   dispatch(userLoggedOut());
 };
+
+export const forgot = (data) =>
+  api.user.forgot(data)
+
+export const reset = (data) =>
+  api.user.reset(data)
