@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { reset } from "../../actions/auth.action";
 
 const ResetForm = props => {
@@ -7,8 +7,6 @@ const ResetForm = props => {
 		password: '',
 		confirm_password: ''
 	});
-
-	console.log(props)
 
 	const [errors, setErrors] = useState({});
 	const [message, setMessage] = useState({});

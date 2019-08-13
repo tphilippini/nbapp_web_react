@@ -35,3 +35,6 @@ export const forgot = (data) =>
 
 export const reset = (data) =>
   api.user.reset(data)
+
+export const validateToken = (token) =>
+  api.user.validateToken(token)

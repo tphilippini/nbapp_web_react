@@ -17,7 +17,7 @@ export default {
         email: user.email,
         user_type: "user",
         grant_type: "forgot"
-      }),
+      }).then(res => res.data),
 
     reset: user =>
       axios.post("/auth/reset", {
@@ -26,7 +26,14 @@ export default {
         confirm_password: user.confirm_password,
         user_type: "user",
         grant_type: "reset"
-      }),
+      }).then(res => res.data),
+    
+    validateToken: token =>
+      axios.post('/auth/validate', {
+        token,
+        user_type: "user",
+        grant_type: "validate"
+      }).then(res => res.data),
 
     signup: user =>
       axios.post("/users", { ...user }).then(res => res.data.data[0]),
