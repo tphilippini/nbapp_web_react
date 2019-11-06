@@ -3,7 +3,7 @@ import {
   USER_LOGGED_OUT,
   USER_FETCHED,
   USER_UPDATED
-} from "../actions/types.action";
+} from '../actions/types.action';
 
 const UserReducer = (state = {}, action = {}) => {
   switch (action.type) {

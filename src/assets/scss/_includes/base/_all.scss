@@ -7,8 +7,8 @@
 @charset "utf-8";
 
 @import url('https://fonts.googleapis.com/css?family=Muli');
-@import "~bulma/sass/utilities/initial-variables";
-@import "~bulma/sass/utilities/functions";
+@import '~bulma/sass/utilities/initial-variables';
+@import '~bulma/sass/utilities/functions';
 
 // Colors
 // $theme: #ff3860;
@@ -24,17 +24,17 @@ $theme: #5f45bb;
 // $green-invert: #fff;
 // $orange-dark: #f96854;
 
-$grey-darker:  #1f2d3b;
-$grey-dark:    #2B3E50;
-$grey:         #4E5D6C;
-$grey-light:   #8694a4;
+$grey-darker: #1f2d3b;
+$grey-dark: #2b3e50;
+$grey: #4e5d6c;
+$grey-light: #8694a4;
 $grey-lighter: #dee5ed;
 
 $dark: darken($grey-darker, 3);
 $light: $white;
 $light-invert: $dark;
 
-$family-serif: "Muli", serif;
+$family-serif: 'Muli', serif;
 
 $info: $theme;
 // $primary: $theme;
@@ -52,7 +52,6 @@ $input-shadow: 0;
 $input-focus-box-shadow-size: 0;
 $button-focus-box-shadow-size: 0;
 
-
 // @media (prefers-color-scheme: light) {
 //   $body-background-color: $white;
 // }
@@ -61,27 +60,29 @@ $button-focus-box-shadow-size: 0;
 //   $body-background-color: $grey-darker;
 // }
 
-
-@import "~bulma/sass/utilities/derived-variables.sass";
-@import "~bulma/bulma";
+@import '~bulma/sass/utilities/derived-variables.sass';
+@import '~bulma/bulma';
+@import '~bulma-extensions/bulma-divider/dist/css/bulma-divider.sass';
+@import '~bulma-extensions/bulma-tooltip/dist/css/bulma-tooltip.sass';
 
 /* Variables */
 // @import "assets/scss/_includes/helpers/variable";
 
 /* Base */
-@import "assets/scss/_includes/base/general";
+@import 'assets/scss/_includes/base/general';
 
 /* Helpers */
 // @import "assets/scss/_includes/helpers/function";
 
 /* Layouts */
-@import "assets/scss/_includes/layouts/hero";
+@import 'assets/scss/_includes/layouts/hero';
 
 /* Components */
-@import "assets/scss/_includes/components/button";
-@import "assets/scss/_includes/components/form";
-@import "assets/scss/_includes/components/navbar";
-@import "assets/scss/_includes/components/spinner";
+@import 'assets/scss/_includes/components/button';
+@import 'assets/scss/_includes/components/form';
+@import 'assets/scss/_includes/components/navbar';
+@import 'assets/scss/_includes/components/spinner';
+@import 'assets/scss/_includes/components/social';
 
 /* Themes */
-@import "assets/scss/_includes/themes/dark";
+@import 'assets/scss/_includes/themes/dark';

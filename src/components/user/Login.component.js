@@ -1,6 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import LoginForm from "./Login.form";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import LoginForm from './Login.form';
+import SocialForm from './Social.form';
 
 const Login = props => {
   return (
@@ -11,6 +12,8 @@ const Login = props => {
             <div className="column is-half">
               <div className="box">
                 <h1 className="title has-text-centered">Connexion</h1>
+                <SocialForm {...props} />
+                <div className="is-divider" data-content="OU"></div>
                 <LoginForm {...props} />
               </div>
               <div className="is-pulled-right">

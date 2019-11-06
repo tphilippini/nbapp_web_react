@@ -1,12 +1,13 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 const AuthContext = createContext({
   user: {
-    uuid: "",
-    email: "",
-    alias: "",
-    firstName: "",
-    lastName: ""
+    uuid: '',
+    email: '',
+    alias: '',
+    firstName: '',
+    lastName: '',
+    methods: []
   }
 });
 

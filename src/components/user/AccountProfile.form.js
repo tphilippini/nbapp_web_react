@@ -1,16 +1,16 @@
-import React, { useState, useContext } from "react";
-import Validator from "validator";
-import { FormattedMessage } from "react-intl";
+import React, { useState, useContext } from 'react';
+// import Validator from 'validator';
+import { FormattedMessage } from 'react-intl';
 
-import AuthContext from "../../contexts/auth.context";
-import { patch } from "../../actions/user.action";
+import AuthContext from '../../contexts/auth.context';
+import { patch } from '../../actions/user.action';
 
 const AccountProfileForm = props => {
   const [user, setUser] = useState({ ...props.user });
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState({});
-	const [loading, setLoading] = useState(false);
-	
+  const [loading, setLoading] = useState(false);
+
   const { dispatch } = useContext(AuthContext);
 
   const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
@@ -18,30 +18,33 @@ const AccountProfileForm = props => {
   const onSubmit = e => {
     e.preventDefault();
     const err = validate(user);
-		setErrors(err);
+    setErrors(err);
     if (Object.keys(err).length === 0) {
-			setLoading(true);
-      patch(user, "update", dispatch)
+      setLoading(true);
+      patch(user, 'update', dispatch)
         .then(() => {
-					setMessage({text: "Your account has been modified with success", type: 'success'});
-					setTimeout( () => {
-						setMessage({});
-						setLoading(false)
-				}, 1000);
-				})
+          setMessage({
+            text: 'Your account has been modified with success',
+            type: 'success'
+          });
+          setTimeout(() => {
+            setMessage({});
+            setLoading(false);
+          }, 1000);
+        })
         .catch(err => {
           setErrors(err.response.data.errors[0]);
           setLoading(false);
-				});
+        });
     }
   };
 
   const validate = data => {
     const err = {};
-    if (!Validator.isEmail(data.email)) err.email = "This email is invalid";
-    if (!data.firstName) err.firstName = "firstName is mandatory";
-    if (!data.lastName) err.lastName = "lastName is mandatory";
-    if (!data.alias) err.alias = "Alias is mandatory";
+    // if (!Validator.isEmail(data.email)) err.email = 'This email is invalid';
+    if (!data.firstName) err.firstName = 'firstName is mandatory';
+    if (!data.lastName) err.lastName = 'lastName is mandatory';
+    if (!data.alias) err.alias = 'Alias is mandatory';
     return err;
   };
 
@@ -53,7 +56,7 @@ const AccountProfileForm = props => {
         </article>
       )}
       {message.text && (
-        <article className={`message is-${message.type ? message.type : ""}`}>
+        <article className={`message is-${message.type ? message.type : ''}`}>
           <div className="message-body">{message.text}</div>
         </article>
       )}
@@ -64,7 +67,7 @@ const AccountProfileForm = props => {
         <div className="control">
           <input
             id="alias"
-            className={`input ${errors.alias ? "is-danger" : ""}`}
+            className={`input ${errors.alias ? 'is-danger' : ''}`}
             autoComplete="off"
             name="alias"
             type="text"
@@ -78,12 +81,12 @@ const AccountProfileForm = props => {
 
       <div className="field">
         <label className="label is-small" htmlFor="firstName">
-					<FormattedMessage id="account.firstName" default="firstName" />					
+          <FormattedMessage id="account.firstName" default="firstName" />
         </label>
         <div className="control">
           <input
             id="firstName"
-            className={`input ${errors.firstName ? "is-danger" : ""}`}
+            className={`input ${errors.firstName ? 'is-danger' : ''}`}
             autoComplete="off"
             name="firstName"
             type="text"
@@ -92,17 +95,19 @@ const AccountProfileForm = props => {
             onChange={onChange}
           />
         </div>
-        {errors.firstName && <p className="help is-danger">{errors.firstName}</p>}
+        {errors.firstName && (
+          <p className="help is-danger">{errors.firstName}</p>
+        )}
       </div>
 
       <div className="field">
         <label className="label is-small" htmlFor="lastName">
-					<FormattedMessage id="account.lastName" default="lastName" />	
+          <FormattedMessage id="account.lastName" default="lastName" />
         </label>
         <div className="control">
           <input
             id="lastName"
-            className={`input ${errors.lastName ? "is-danger" : ""}`}
+            className={`input ${errors.lastName ? 'is-danger' : ''}`}
             autoComplete="off"
             name="lastName"
             type="text"
@@ -114,7 +119,7 @@ const AccountProfileForm = props => {
         {errors.lastName && <p className="help is-danger">{errors.lastName}</p>}
       </div>
 
-      <div className="field">
+      {/* <div className="field">
         <label className="label is-small" htmlFor="email">
           Email
         </label>
@@ -131,16 +136,16 @@ const AccountProfileForm = props => {
           />
         </div>
         {errors.email && <p className="help is-danger">{errors.email}</p>}
-      </div>
+      </div> */}
 
       <div className="columns">
         <div className="column">
-          <div className="field is-pulled-left">
+          <div className="field is-pulled-right">
             <div className="control">
               <button
-                className={`button is-info ${loading ? "is-loading" : ""}`}
+                className={`button is-info ${loading ? 'is-loading' : ''}`}
               >
-                <FormattedMessage id="utils.apply" default="apply" />	
+                <FormattedMessage id="utils.apply" default="apply" />
               </button>
             </div>
           </div>

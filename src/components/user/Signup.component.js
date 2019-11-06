@@ -1,6 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import SignupForm from "./Signup.form";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import SignupForm from './Signup.form';
+import SocialForm from './Social.form';
 
 const Signup = props => {
   return (
@@ -11,6 +12,8 @@ const Signup = props => {
             <div className="column is-half">
               <div className="box">
                 <h1 className="title has-text-centered">Inscription</h1>
+                <SocialForm {...props} />
+                <div className="is-divider" data-content="OU"></div>
                 <SignupForm {...props} />
               </div>
               <div className="is-pulled-right">
