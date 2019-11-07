@@ -1,5 +1,6 @@
 .navbar .navbar-item,
-.navbar .icon, .navbar .navbar-item .is-flags {
+.navbar .icon,
+.navbar .navbar-item .is-flags {
   cursor: pointer;
 }
 
@@ -13,12 +14,12 @@
 }
 
 .navbar .navbar-item .select select {
-	&:focus,
-	&.is-focused,
-	&:active,
-	&.is-active {
-		border-color: $theme;
-	}
+  &:focus,
+  &.is-focused,
+  &:active,
+  &.is-active {
+    border-color: $theme;
+  }
 }
 
 .navbar.is-light .navbar-start > a.navbar-item:hover,
@@ -27,6 +28,10 @@
 .navbar.is-light .navbar-brand > a.navbar-item.is-active,
 .navbar.is-light .navbar-brand .navbar-link:hover,
 .navbar.is-light .navbar-brand .navbar-link.is-active {
-	background-color: transparent;
-	color: inherit;
+  background-color: transparent;
+  color: inherit;
+}
+
+.navbar-item.is-social-avatar img {
+  max-height: initial;
 }

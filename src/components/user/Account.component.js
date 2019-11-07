@@ -12,21 +12,31 @@ const Account = props => {
       {({ user }) => (
         <section className="section">
           <div className="container">
+            <div className="columns is-vcentered">
+              <div className="column">
+                <h5 className="title">
+                  Bonjour {user.firstName ? user.firstName : ''}
+                </h5>
+              </div>
+              <div className="column">
+                <div className="is-pulled-right">
+                  <LinkSocialForm user={user} />
+                </div>
+              </div>
+            </div>
+
+            <hr style={{ margin: '0 0 3rem' }}></hr>
+
             <div className="columns is-centered">
               <div className="column">
                 <div className="columns is-vcentered">
-                  <div className="column is-5">
+                  <div className="column">
                     <h5 className="title">
                       <FormattedMessage
                         id="account.information_0"
                         default="Basic information"
                       />
                     </h5>
-                  </div>
-                  <div className="column">
-                    <div className="is-pulled-right">
-                      <LinkSocialForm user={user} />
-                    </div>
                   </div>
                 </div>
 

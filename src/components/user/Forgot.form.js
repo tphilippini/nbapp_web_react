@@ -1,42 +1,48 @@
-import React, { useState} from "react";
-import { Link } from "react-router-dom";
-import Validator from "validator";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Validator from 'validator';
 
-import { forgot } from "../../actions/auth.action";
+import { forgot } from '../../actions/auth.action';
 
 const ForgotForm = props => {
-  const [user, setUser] = useState({ email: "" });
-	const [errors, setErrors] = useState({});
-	const [message, setMessage] = useState({});
-	const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({ email: '' });
+  const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
-		const err = validate(user);
-		setErrors(err);
+    const err = validate(user);
+    setErrors(err);
     if (Object.keys(err).length === 0) {
       setLoading(true);
       forgot(user)
-				.then(() => {
-					setMessage({text: "An email has been sent with success", type: 'success'});
-					setTimeout( () => {
-						setMessage({});
-						setLoading(false)
-						props.history.push("/login")
-				}, 1000);
-				})
+        .then(() => {
+          setMessage({
+            text: 'An email has been sent with success',
+            type: 'success'
+          });
+          setTimeout(() => {
+            setMessage({});
+            setLoading(false);
+            props.history.push('/login');
+          }, 1000);
+        })
         .catch(err => {
           setErrors(err.response.data.errors[0]);
           setLoading(false);
+          setTimeout(() => {
+            setErrors({});
+          }, 1000);
         });
     }
   };
 
   const validate = data => {
     const err = {};
-    if (!Validator.isEmail(data.email)) err.email = "This email is invalid";
+    if (!Validator.isEmail(data.email)) err.email = 'This email is invalid';
     return err;
   };
 
@@ -46,9 +52,9 @@ const ForgotForm = props => {
         <article className="message is-danger">
           <div className="message-body">{errors.message}</div>
         </article>
-			)}
-			{message.text && (
-        <article className={`message is-${message.type ? message.type : ""}`}>
+      )}
+      {message.text && (
+        <article className={`message is-${message.type ? message.type : ''}`}>
           <div className="message-body">{message.text}</div>
         </article>
       )}
@@ -59,7 +65,7 @@ const ForgotForm = props => {
         <div className="control">
           <input
             id="email"
-            className={`input ${errors.email ? "is-danger" : ""}`}
+            className={`input ${errors.email ? 'is-danger' : ''}`}
             autoComplete="off"
             autoFocus
             name="email"
@@ -82,7 +88,7 @@ const ForgotForm = props => {
           <div className="field is-pulled-right">
             <div className="control">
               <button
-                className={`button is-info ${loading ? "is-loading" : ""}`}
+                className={`button is-info ${loading ? 'is-loading' : ''}`}
               >
                 Envoyer
               </button>

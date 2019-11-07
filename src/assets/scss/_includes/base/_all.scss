@@ -62,8 +62,7 @@ $button-focus-box-shadow-size: 0;
 
 @import '~bulma/sass/utilities/derived-variables.sass';
 @import '~bulma/bulma';
-@import '~bulma-extensions/bulma-divider/dist/css/bulma-divider.sass';
-@import '~bulma-extensions/bulma-tooltip/dist/css/bulma-tooltip.sass';
+@import '~bulma-extensions/src/sass/index';
 
 /* Variables */
 // @import "assets/scss/_includes/helpers/variable";

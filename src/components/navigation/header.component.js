@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
-import AuthContext from "../../contexts/auth.context";
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+import AuthContext from '../../contexts/auth.context';
 import Avatar from 'react-avatar';
-import LangSelect from "../helpers/lang.helpers";
-import { logout } from "../../actions/auth.action";
+import LangSelect from '../helpers/lang.helpers';
+import { logout } from '../../actions/auth.action';
 
 const Header = () => {
   const { dispatch } = useContext(AuthContext);
@@ -37,8 +37,23 @@ const Header = () => {
 
                 {user && user.email ? (
                   <>
-                    <Link className="navbar-item" to="/account">
-                      <Avatar name={user.firstName && user.lastName ? user.firstName +  " " + user.lastName : user.alias} color="#f4f4f4" fgColor="#5f45bb" size="40" round="20px"/>
+                    <Link
+                      className="navbar-item is-social-avatar"
+                      to="/account"
+                    >
+                      <Avatar
+                        facebookId={user.fid ? user.fid : ''}
+                        googleId={user.gid ? user.gid : ''}
+                        name={
+                          user.firstName && user.lastName
+                            ? user.firstName + ' ' + user.lastName
+                            : user.alias
+                        }
+                        color="#f4f4f4"
+                        fgColor="#5f45bb"
+                        size="40"
+                        round={true}
+                      />
                     </Link>
                     <div className="navbar-item">
                       <div

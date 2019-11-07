@@ -19,7 +19,9 @@ img {
 }
 
 // Removing the dotted outline
-a:hover, a:active, a:focus {
+a:hover,
+a:active,
+a:focus {
   outline: 0;
 }
 
@@ -32,6 +34,13 @@ option:not(:checked) {
   color: black; /* prevent <option>s from becoming transparent as well */
 }
 
-::-moz-focus-inner { 
-  border: 0; 
+::-moz-focus-inner {
+  border: 0;
+}
+
+hr {
+  background-color: #f5f5f5;
+  border: none;
+  display: block;
+  height: 2px;
 }

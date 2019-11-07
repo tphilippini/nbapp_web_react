@@ -94,12 +94,12 @@ const LinkSocialForm = props => {
       {props.user.methods && props.user.methods.includes('facebook') ? (
         <button
           className="button is-facebook is-small is-outline has-social-link"
-          data-tooltip="Dissocier son compte de Facebook"
           onClick={onUnlinkingFacebook}
         >
           <span className="icon">
             <i className="fa fa-facebook"></i>
           </span>
+          <span>Dissocier son compte</span>
         </button>
       ) : (
         <FacebookLogin
@@ -109,12 +109,13 @@ const LinkSocialForm = props => {
           callback={onLinkingFacebook}
           render={renderProps => (
             <button
-              className="button is-facebook is-small has-social-link has-tooltip-top"
+              className="button is-facebook is-small has-social-link"
               onClick={renderProps.onClick}
             >
               <span className="icon">
                 <i className="fa fa-facebook"></i>
               </span>
+              <span>Lier son compte</span>
             </button>
           )}
         />
@@ -128,6 +129,7 @@ const LinkSocialForm = props => {
           <span className="icon">
             <i className="fa fa-google"></i>
           </span>
+          <span>Dissocier son compte</span>
         </button>
       ) : (
         <GoogleLogin
@@ -140,6 +142,7 @@ const LinkSocialForm = props => {
               <span className="icon">
                 <i className="fa fa-google"></i>
               </span>
+              <span>Lier son compte</span>
             </button>
           )}
           onSuccess={onLinkingGoogle}

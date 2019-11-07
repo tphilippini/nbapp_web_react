@@ -35,6 +35,9 @@ const AccountProfileForm = props => {
         .catch(err => {
           setErrors(err.response.data.errors[0]);
           setLoading(false);
+          setTimeout(() => {
+            setErrors({});
+          }, 1000);
         });
     }
   };

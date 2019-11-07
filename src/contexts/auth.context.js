@@ -7,7 +7,9 @@ const AuthContext = createContext({
     alias: '',
     firstName: '',
     lastName: '',
-    methods: []
+    methods: [],
+    fid: '',
+    gid: ''
   }
 });
 
