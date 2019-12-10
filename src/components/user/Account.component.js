@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import AuthContext from '../../contexts/auth.context';
+import AuthContext from '../../stores/contexts/auth.context';
 import AccountProfileForm from './AccountProfile.form';
 import AccountPasswordForm from './AccountPassword.form';
 import LinkSocialForm from './LinkSocial.form';

@@ -2,13 +2,13 @@ import React, { useState, useContext } from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
-import AuthContext from '../../contexts/auth.context';
+import AuthContext from '../../stores/contexts/auth.context';
 import {
   linkGoogle,
   linkFacebook,
   unlinkGoogle,
   unlinkFacebook
-} from '../../actions/user.action';
+} from '../../stores/actions/user.action';
 
 const LinkSocialForm = props => {
   const [message, setMessage] = useState({});

@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react';
 // import Validator from 'validator';
 import { FormattedMessage } from 'react-intl';
 
-import AuthContext from '../../contexts/auth.context';
-import { patch } from '../../actions/user.action';
+import AuthContext from '../../stores/contexts/auth.context';
+import { patch } from '../../stores/actions/user.action';
 
 const AccountProfileForm = props => {
   const [user, setUser] = useState({ ...props.user });

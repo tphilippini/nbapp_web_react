@@ -1,12 +1,12 @@
-import React, { useEffect, useContext, useReducer } from "react";
-import { IntlProvider, addLocaleData } from "react-intl";
-import en from "react-intl/locale-data/en";
-import fr from "react-intl/locale-data/fr";
-import LocaleContext from "../contexts/locale.context";
-import LocaleReducer from "../reducers/locale.reducer";
-import i18n from "../utils/i18n";
+import React, { useEffect, useContext, useReducer } from 'react';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import en from 'react-intl/locale-data/en';
+import fr from 'react-intl/locale-data/fr';
+import LocaleContext from '../contexts/locale.context';
+import LocaleReducer from '../reducers/locale.reducer';
+import i18n from '../../utils/i18n';
 
-import { setLocalei18n, setTheme } from "../actions/locale.action";
+import { setLocalei18n, setTheme } from '../actions/locale.action';
 
 const LocaleProvider = ({ children }) => {
   const initialState = useContext(LocaleContext);

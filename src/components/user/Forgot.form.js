@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Validator from 'validator';
 
-import { forgot } from '../../actions/auth.action';
+import { forgot } from '../../stores/actions/auth.action';
 
 const ForgotForm = props => {
   const [user, setUser] = useState({ email: '' });

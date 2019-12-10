@@ -1,6 +1,6 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import AuthContext from "../../contexts/auth.context";
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import AuthContext from '../../stores/contexts/auth.context';
 
 const UserRoute = ({ component: Component, ...rest }) => (
   <AuthContext.Consumer>

@@ -5,7 +5,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import "font-awesome/css/font-awesome.min.css";
 
 import App from "./App";
-import Store from "./providers/store.provider";
+import Store from "./stores/providers/store.provider";
 import * as serviceWorker from "./serviceWorker";
 import "./index.scss";
 

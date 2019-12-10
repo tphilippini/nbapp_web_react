@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import Validator from "validator";
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import Validator from 'validator';
 
-import AuthContext from "../../contexts/auth.context";
-import { login } from "../../actions/auth.action";
+import AuthContext from '../../stores/contexts/auth.context';
+import { login } from '../../stores/actions/auth.action';
 
 const LoginForm = props => {
-  const [user, setUser] = useState({ email: "", password: "" });
+  const [user, setUser] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +21,7 @@ const LoginForm = props => {
     if (Object.keys(err).length === 0) {
       setLoading(true);
       login(user, dispatch)
-        .then(() => props.history.push("/dashboard"))
+        .then(() => props.history.push('/dashboard'))
         .catch(err => {
           setErrors(err.response.data.errors[0]);
           setLoading(false);
@@ -31,8 +31,8 @@ const LoginForm = props => {
 
   const validate = data => {
     const err = {};
-    if (!Validator.isEmail(data.email)) err.email = "This email is invalid";
-    if (!data.password) err.password = "Password is mandatory";
+    if (!Validator.isEmail(data.email)) err.email = 'This email is invalid';
+    if (!data.password) err.password = 'Password is mandatory';
     return err;
   };
 
@@ -50,7 +50,7 @@ const LoginForm = props => {
         <div className="control">
           <input
             id="email"
-            className={`input ${errors.email ? "is-danger" : ""}`}
+            className={`input ${errors.email ? 'is-danger' : ''}`}
             autoComplete="off"
             autoFocus
             name="email"
@@ -70,7 +70,7 @@ const LoginForm = props => {
         <div className="control">
           <input
             id="password"
-            className={`input ${errors.password ? "is-danger" : ""}`}
+            className={`input ${errors.password ? 'is-danger' : ''}`}
             autoComplete="off"
             name="password"
             type="password"
@@ -92,7 +92,7 @@ const LoginForm = props => {
           <div className="field is-pulled-right">
             <div className="control">
               <button
-                className={`button is-info ${loading ? "is-loading" : ""}`}
+                className={`button is-info ${loading ? 'is-loading' : ''}`}
               >
                 Connexion
               </button>

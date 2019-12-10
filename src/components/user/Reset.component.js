@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import ResetForm from "./Reset.form";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import ResetForm from './Reset.form';
 
-import { validateToken } from "../../actions/auth.action";
+import { validateToken } from '../../stores/actions/auth.action';
 
 const Reset = props => {
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-		validateToken(props.match.params.token)
-			.then(() => {
-				setLoading(false);
-				setSuccess(true);
-			})
+    validateToken(props.match.params.token)
+      .then(() => {
+        setLoading(false);
+        setSuccess(true);
+      })
       .catch(() => {
-				setLoading(false);
-				setSuccess(false);
-			});
+        setLoading(false);
+        setSuccess(false);
+      });
     // eslint-disable-next-line
   }, []);
 
@@ -32,28 +32,26 @@ const Reset = props => {
                   Réinitialisation mot de passe
                 </h1>
 
-                {loading &&
+                {loading && (
                   <article className="message is-info">
-                    <div className="message-body">
-                      Chargement...
-                    </div>
+                    <div className="message-body">Chargement...</div>
                   </article>
-                }
+                )}
 
-                {!loading && success &&
+                {!loading && success && (
                   <ResetForm {...props} token={props.match.params.token} />
-                }
+                )}
 
-                {!loading && !success &&
+                {!loading && !success && (
                   <div className="has-text-centered">
                     <article className="message is-danger">
-                      <div className="message-body">
-                        Accès non valide
-                      </div>
+                      <div className="message-body">Accès non valide</div>
                     </article>
-                    <Link className="button is-info" to="/">Retour</Link>
+                    <Link className="button is-info" to="/">
+                      Retour
+                    </Link>
                   </div>
-                }                
+                )}
               </div>
             </div>
           </div>

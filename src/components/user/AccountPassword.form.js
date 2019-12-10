@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
-import AuthContext from '../../contexts/auth.context';
-import { patch } from '../../actions/user.action';
+import AuthContext from '../../stores/contexts/auth.context';
+import { patch } from '../../stores/actions/user.action';
 
 const AccountPasswordForm = props => {
   const [user, setUser] = useState({

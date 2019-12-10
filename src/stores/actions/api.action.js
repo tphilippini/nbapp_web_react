@@ -110,5 +110,9 @@ export default {
         .get('/users/current')
         .then(res => res.data.data[0])
         .catch(err => err)
+  },
+
+  match: {
+    fetch: date => axios.get(`/matches/${date}`).then(res => res.data)
   }
 };

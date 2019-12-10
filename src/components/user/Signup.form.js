@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
-import Validator from "validator";
-import { FormattedMessage } from "react-intl";
+import React, { useState, useContext } from 'react';
+import Validator from 'validator';
+import { FormattedMessage } from 'react-intl';
 
-import AuthContext from "../../contexts/auth.context";
-import { signup } from "../../actions/user.action";
+import AuthContext from '../../stores/contexts/auth.context';
+import { signup } from '../../stores/actions/user.action';
 
 const SignupForm = props => {
-  const [user, setUser] = useState({ alias: "", email: "", password: "" });
+  const [user, setUser] = useState({ alias: '', email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +21,7 @@ const SignupForm = props => {
     if (Object.keys(err).length === 0) {
       setLoading(true);
       signup(user, dispatch)
-        .then(() => props.history.push("/dashboard"))
+        .then(() => props.history.push('/dashboard'))
         .catch(err => {
           setErrors(err.response.data.errors[0]);
           setLoading(false);
@@ -31,9 +31,9 @@ const SignupForm = props => {
 
   const validate = data => {
     const err = {};
-    if (!Validator.isEmail(data.email)) err.email = "This email is invalid";
-    if (!data.password) err.password = "Password is mandatory";
-    if (!data.alias) err.alias = "Alias is mandatory";
+    if (!Validator.isEmail(data.email)) err.email = 'This email is invalid';
+    if (!data.password) err.password = 'Password is mandatory';
+    if (!data.alias) err.alias = 'Alias is mandatory';
     return err;
   };
 
@@ -51,7 +51,7 @@ const SignupForm = props => {
         <div className="control">
           <input
             id="alias"
-            className={`input ${errors.alias ? "is-danger" : ""}`}
+            className={`input ${errors.alias ? 'is-danger' : ''}`}
             autoComplete="off"
             autoFocus
             name="alias"
@@ -71,7 +71,7 @@ const SignupForm = props => {
         <div className="control">
           <input
             id="email"
-            className={`input ${errors.email ? "is-danger" : ""}`}
+            className={`input ${errors.email ? 'is-danger' : ''}`}
             autoComplete="off"
             name="email"
             type="mail"
@@ -90,7 +90,7 @@ const SignupForm = props => {
         <div className="control">
           <input
             id="password"
-            className={`input ${errors.password ? "is-danger" : ""}`}
+            className={`input ${errors.password ? 'is-danger' : ''}`}
             autoComplete="off"
             name="password"
             type="password"
@@ -107,7 +107,7 @@ const SignupForm = props => {
           <div className="field is-pulled-right">
             <div className="control">
               <button
-                className={`button is-info ${loading ? "is-loading" : ""}`}
+                className={`button is-info ${loading ? 'is-loading' : ''}`}
               >
                 Inscription
               </button>

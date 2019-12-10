@@ -1,10 +1,78 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
-import AuthContext from '../../contexts/auth.context';
-import Avatar from 'react-avatar';
-import LangSelect from '../helpers/lang.helpers';
-import { logout } from '../../actions/auth.action';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
+import AuthContext from "../../stores/contexts/auth.context";
+import Avatar from "react-avatar";
+import LangSelect from "../helpers/lang.helpers";
+import { logout } from "../../stores/actions/auth.action";
+
+import styled from "styled-components";
+import { device } from "../../utils/device.utils";
+import { ReactComponent as Ball } from "../../assets/images/ball.svg";
+
+const HeaderWrapper = styled.div`
+  user-select: none;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  z-index: 1;
+
+  @media ${device.tablet} {
+    background-color: red;
+  }
+`;
+
+const LogoWrapper = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+`;
+
+const Title = styled.span`
+  color: white;
+  font-family: "Fugaz One", cursive;
+  font-weight: 800;
+  font-size: 18px;
+  text-transform: uppercase;
+`;
+
+const Menu = styled.ul`
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  @media (max-width: 450px) {
+    /* flex-flow: column wrap; */
+    display: none;
+  }
+`;
+
+const Item = styled.li`
+  padding: 1em;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  font-family: "Fugaz One", cursive;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+`;
+
+const BallWrapper = styled.div`
+  margin: 10px;
+`;
 
 const Header = () => {
   const { dispatch } = useContext(AuthContext);
@@ -12,77 +80,57 @@ const Header = () => {
   return (
     <AuthContext.Consumer>
       {({ user }) => (
-        <nav className="navbar is-light">
-          <div className="container">
-            <div className="navbar-brand">
-              {user && user.email ? (
-                <Link className="navbar-item" to="/dashboard">
-                  <FormattedMessage id="nav.dashboard" default="Dashboard" />
-                </Link>
-              ) : (
-                <Link className="navbar-item" to="/">
-                  <FormattedMessage id="nav.dashboard" default="Dashboard" />
-                </Link>
-              )}
-            </div>
-
-            <div className="navbar-menu">
-              <div className="navbar-end">
-                {/* <div className="navbar-item">
-                  <ThemeSelect />
-                </div> */}
-                <div className="navbar-item">
-                  <LangSelect />
-                </div>
-
+        <HeaderWrapper>
+          <LogoWrapper href={user && user.email ? "/dashboard" : "/"}>
+            <BallWrapper>
+              <Ball />
+            </BallWrapper>
+            <div>
+              <Title>
                 {user && user.email ? (
-                  <>
-                    <Link
-                      className="navbar-item is-social-avatar"
-                      to="/account"
-                    >
-                      <Avatar
-                        facebookId={user.fid ? user.fid : ''}
-                        googleId={user.gid ? user.gid : ''}
-                        name={
-                          user.firstName && user.lastName
-                            ? user.firstName + ' ' + user.lastName
-                            : user.alias
-                        }
-                        color="#f4f4f4"
-                        fgColor="#5f45bb"
-                        size="40"
-                        round={true}
-                      />
-                    </Link>
-                    <div className="navbar-item">
-                      <div
-                        className="navbar-item"
-                        onClick={() => logout(dispatch)}
-                      >
-                        <button className="button is-info is-rounded">
-                          <span>Déconnexion</span>
-                          <span className="icon is-small">
-                            <i className="fa fa-sign-out" />
-                          </span>
-                        </button>
-                      </div>
-                    </div>
-                  </>
+                  <FormattedMessage id="nav.dashboard" default="Dashboard" />
                 ) : (
-                  <div className="navbar-item">
-                    <Link className="button is-info is-rounded" to="/login">
-                      <span>Connexion</span>
-                      <span className="icon is-small">
-                        <i className="fa fa-sign-in" />
-                      </span>
-                    </Link>
-                  </div>
+                  "FANJAM"
                 )}
-              </div>
+              </Title>
             </div>
-          </div>
-        </nav>
+          </LogoWrapper>
+          <Menu>
+            <Item>
+              <LangSelect />
+            </Item>
+            {user && user.email ? (
+              <>
+                <Item>
+                  <Link to="/account">
+                    <Avatar
+                      facebookId={user.fid ? user.fid : ""}
+                      googleId={user.gid ? user.gid : ""}
+                      name={
+                        user.firstName && user.lastName
+                          ? user.firstName + " " + user.lastName
+                          : user.alias
+                      }
+                      color="#f4f4f4"
+                      fgColor="#5f45bb"
+                      size="30"
+                      round={true}
+                    />
+                  </Link>
+                </Item>
+                <Item onClick={() => logout(dispatch)}>
+                  <FormattedMessage id="account.logout" default="Logout" />
+                </Item>
+              </>
+            ) : (
+              <Item>
+                <Link to="/login">
+                  <FormattedMessage id="account.login" default="Login" />
+                </Link>
+              </Item>
+            )}
+          </Menu>
+        </HeaderWrapper>
       )}
     </AuthContext.Consumer>
   );

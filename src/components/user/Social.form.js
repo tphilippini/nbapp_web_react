@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
-import AuthContext from '../../contexts/auth.context';
-import { loginFacebook, loginGoogle } from '../../actions/auth.action';
+import AuthContext from '../../stores/contexts/auth.context';
+import { loginFacebook, loginGoogle } from '../../stores/actions/auth.action';
 
 const SocialForm = props => {
   const [errors, setErrors] = useState({});
