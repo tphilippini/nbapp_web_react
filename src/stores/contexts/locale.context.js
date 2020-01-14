@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 const LocaleContext = createContext({
   lang: "fr",
-  theme: "light"
+  theme: "dark"
 });
 
 export default LocaleContext;

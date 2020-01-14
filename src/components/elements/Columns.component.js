@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // https://dev.to/drews256/ridiculously-easy-row-and-column-layouts-with-flexbox-1k01
 
@@ -15,10 +15,25 @@ const StyledColumns = styled.div`
   &:not(:last-child) {
     margin-bottom: calc(1.5rem - 0.75rem);
   }
-  /* Modifiers */
-  &.is-centered {
-    justify-content: center;
-  }
+
+  ${props =>
+    props.centered &&
+    css`
+      justify-content: center;
+    `};
+
+  ${props =>
+    props.vcentered &&
+    css`
+      align-items: center;
+    `};
+
+  ${props =>
+    props.marginless &&
+    css`
+      margin: 0;
+    `};
+
   &.is-gapless {
     margin-left: 0;
     margin-right: 0;
@@ -35,9 +50,6 @@ const StyledColumns = styled.div`
   }
   &.is-multiline {
     flex-wrap: wrap;
-  }
-  &.is-vcentered {
-    align-items: center;
   }
 
   @media (min-width: 769px) {

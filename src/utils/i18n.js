@@ -6,13 +6,28 @@ export default {
     "account.login": "Login",
     "account.logout": "Logout",
     "account.signup": "Sign up",
+    "account.register": "Next",
     "account.information_0": "Basic information",
     "account.information_1": "Change password",
+    "account.information_2": "Back to login",
+    "account.information_3": "New ? sign up",
+    "account.information_4": "Have an account? Log in",
+    "account.forgot": "Forgot password?",
+    "account.reset": "Reset password",
     "account.alias": "Username",
+    "account.email": "Email",
     "account.firstName": "FirstName",
     "account.lastName": "LastName",
+    "account.password": "Password",
+    "account.new_password": "New password",
+    "account.confirm_password": "Password confirmation",
 
-    "utils.apply": "Apply"
+    "utils.apply": "Apply",
+    "utils.send": "Send",
+    "utils.update": "Update",
+    "utils.loading": "Loading...",
+    "utils.invalid_access": "Invalid access...",
+    "utils.back": "Retour"
   },
   fr: {
     "nav.dashboard": "Tableau de bord",
@@ -21,12 +36,27 @@ export default {
     "account.login": "Connexion",
     "account.signup": "Créer son compte",
     "account.logout": "Déconnexion",
+    "account.register": "Inscription",
     "account.information_0": "Mon compte",
     "account.information_1": "Changer mon mot de passe",
+    "account.information_2": "Retour à la connexion",
+    "account.information_3": "Nouveau ? Créer son compte",
+    "account.information_4": "Vous avez un compte ? Connexion",
+    "account.forgot": "Mot de passe oublié ?",
+    "account.reset": "Réinitialisation mot de passe",
     "account.alias": "Nom d'utilisateur",
+    "account.email": "Email",
     "account.firstName": "Prénom",
     "account.lastName": "Nom",
+    "account.password": "Mot de passe",
+    "account.new_password": "Nouveau mot de passe",
+    "account.confirm_password": "Confirmation mot de passe",
 
-    "utils.apply": "Enregistrer"
+    "utils.apply": "Enregistrer",
+    "utils.send": "Envoyer",
+    "utils.update": "Mise à jour",
+    "utils.loading": "Chargement...",
+    "utils.invalid_access": "Accès non valide...",
+    "utils.back": "Retour"
   }
 };

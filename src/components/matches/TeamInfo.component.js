@@ -14,20 +14,19 @@ const TeamInfoWrapper = styled.div`
 `;
 
 const TeamName = styled(animated.div)`
-  font-family: "Fugaz One", cursive;
+  /* font-family: "Fugaz One", cursive; */
   font-weight: 800;
-  color: "white";
   text-transform: uppercase;
 `;
 
 const Score = styled(animated.span)`
-  font-family: "Fugaz One", cursive;
-  color: white;
+  /* font-family: "Fugaz One", cursive; */
 `;
 
 const TeamRecord = styled.span`
-  font-family: "Fugaz One", cursive;
-  color: #848181;
+  /* font-family: "Fugaz One", cursive; */
+  /* color: #848181; */
+  color: ${props => props.theme.fontSecondary};
   font-size: 10px;
 `;
 
@@ -40,8 +39,7 @@ const TeamInfo = ({
   toggleDivider,
   cardOpen,
   homeSelected,
-  home,
-  favTeam
+  home
 }) => {
   const handleClick = event => {
     homeSelected && !home && cardOpen && toggleDivider(event);

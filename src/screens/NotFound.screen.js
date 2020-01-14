@@ -14,19 +14,18 @@ const Content = styled(animated.div)`
 
 const Title = styled.div`
   font-size: 22px;
-  /* font-family: "Fugaz One", cursive; */
   font-weight: 800;
   top: 50%;
   position: absolute;
   text-transform: uppercase;
 `;
 
-const Landing = () => {
+const NotFound = () => {
   return (
     <Content>
-      <Title>Landing</Title>
+      <Title>Error 404</Title>
     </Content>
   );
 };
 
-export default Landing;
+export default NotFound;

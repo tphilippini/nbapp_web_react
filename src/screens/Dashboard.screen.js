@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 
-import Columns from "../styles/layout/Columns.style";
-import Column from "../styles/layout/Column.style";
+import Columns from "../components/elements/Columns.component";
+import Column from "../components/elements/Column.component";
 import { Transition } from "react-spring/renderprops";
 
 import VideoContext from "../stores/contexts/video.context";
@@ -25,9 +25,8 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-  color: white;
   font-size: 22px;
-  font-family: "Fugaz One", cursive;
+  /* font-family: "Fugaz One", cursive; */
   font-weight: 800;
 `;
 

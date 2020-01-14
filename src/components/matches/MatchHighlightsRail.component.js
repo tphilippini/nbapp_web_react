@@ -17,7 +17,7 @@ const Title = styled.h1`
   /* font-family: "Roboto"; */
   font-weight: bold;
   font-size: 12px;
-  color: white;
+  color: ${props => props.theme.font};
   margin: 0px;
   padding-left: 10px;
   padding-bottom: 10px;
@@ -37,7 +37,7 @@ const VideoRow = styled.div`
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  background-color: #80808014;
+  background-color: ${props => props.theme.background};
   align-items: center;
   padding-top: 10px;
   padding-bottom: 10px;

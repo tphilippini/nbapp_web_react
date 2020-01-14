@@ -1,6 +1,6 @@
-import setAuthorizationHeader from '../../utils/setAuthorizationHeader.utils';
-import { USER_LOGGED_IN, USER_LOGGED_OUT } from './types.action';
-import api from './api.action';
+import setAuthorizationHeader from "../../utils/setAuthorizationHeader.utils";
+import { USER_LOGGED_IN, USER_LOGGED_OUT } from "./types.action";
+import api from "./api.action";
 
 export const userLoggedIn = user => ({
   type: USER_LOGGED_IN,
@@ -60,7 +60,7 @@ export const loginFacebook = (token, dispatch) =>
   });
 
 export const logout = dispatch => {
-  localStorage.removeItem('USER_DATA');
+  localStorage.removeItem("USER_DATA");
   setAuthorizationHeader();
   dispatch(userLoggedOut());
 };

@@ -1,28 +1,32 @@
-import React, { useContext } from 'react';
-import LocaleContext from '../../stores/contexts/locale.context';
-import { setLocalei18n } from '../../stores/actions/locale.action';
+import React, { useContext } from "react";
+import LocaleContext from "../../stores/contexts/locale.context";
+import { setLocalei18n } from "../../stores/actions/locale.action";
+
+import Select from "../../components/forms/Select.component";
 
 const LangSelect = () => {
   const { lang, dispatch } = useContext(LocaleContext);
+  const options = [
+    { label: "FR", value: "fr" },
+    { label: "EN", value: "en" }
+  ];
 
   const onLanguageSelect = e => setLocalei18n(e.target.value, dispatch);
 
-  const renderOption = code => (
-    <option value={code}>{code.toUpperCase()}</option>
-  );
+  // const renderOption = code => (
+  //   <option value={code}>{code.toUpperCase()}</option>
+  // );
 
   return (
-    <div className="control has-icons-left">
-      <div className="select is-small is-rounded">
-        <select value={lang} onChange={onLanguageSelect}>
-          {renderOption('en')}
-          {renderOption('fr')}
-        </select>
-      </div>
-      <span className="icon is-small is-left">
-        <i className="fa fa-globe" />
-      </span>
-    </div>
+    <Select
+      value={lang}
+      onChange={onLanguageSelect}
+      primary="true"
+      rounded="true"
+      small="true"
+      fullwidth="true"
+      options={options}
+    ></Select>
   );
 };
 

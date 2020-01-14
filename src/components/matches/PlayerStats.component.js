@@ -15,9 +15,8 @@ const PlayerStatWrapper = styled.div`
 // const PlayerName = styled(Link)`
 const PlayerName = styled.div`
   font-size: 12px;
-  font-family: "Roboto";
   font-weight: bold;
-  color: white;
+  color: ${props => props.theme.font};
   text-align: start;
   padding-bottom: 10px;
   padding-left: 10px;
@@ -27,23 +26,21 @@ const PlayerName = styled.div`
 `;
 
 const Stats = styled.div`
-  color: #848181;
   font-size: 10px;
-  font-family: "Roboto";
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
   width: 100%;
   padding: 10px;
-  background-color: #80808014;
+  background-color: ${props => props.theme.box};
+  color: ${props => props.theme.fontSecondary};
 `;
 
 const StatNumber = styled.div`
-  color: #848181;
+  /* color: #848181; */
   font-size: 13px;
-  font-family: "Fugaz One" cursive;
   font-weight: 800;
-  color: white;
+  color: ${props => props.theme.font};
   display: flex;
   flex: 1;
   justify-content: center;
@@ -68,6 +65,7 @@ const VideoRow = styled.div`
   width: 100%;
   background-color: #80808014;
   padding-bottom: 10px;
+  padding-top: 10px;
 `;
 
 const StatsRow = styled.div`
@@ -75,6 +73,7 @@ const StatsRow = styled.div`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  background-color: ${props => props.theme.background};
 `;
 
 const GridItem = styled.div`

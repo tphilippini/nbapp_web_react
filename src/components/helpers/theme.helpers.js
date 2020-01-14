@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
-import LocaleContext from "../../contexts/locale.context";
-import { setTheme } from "../../actions/locale.action";
+import LocaleContext from "../../stores/contexts/locale.context";
+import { setTheme } from "../../stores/actions/locale.action";
+
+import Button from "../buttons/Button.component";
+import Icon from "../elements/Icon.component";
 
 const ThemeSelect = () => {
   const { theme, dispatch } = useContext(LocaleContext);
@@ -10,24 +13,24 @@ const ThemeSelect = () => {
   // const renderOption = code => <option value={code}>{code}</option>;
 
   const toggleTheme = () => {
-    (theme === 'light') ? setTheme("dark", dispatch) : setTheme("light", dispatch);
-  }
+    theme === "light"
+      ? setTheme("dark", dispatch)
+      : setTheme("light", dispatch);
+  };
 
   return (
-    <div className="control">
-      {/* <div className="select is-small is-rounded">
-        <select value={theme} onChange={onThemeSelect}>
-          {renderOption("light")}
-          {renderOption("dark")}
-        </select> 
-      </div>*/}
-
-      <button className="button is-rounded is-small" onClick={toggleTheme}>
-        <span className="icon is-small">
-          <i className={`fa ${theme && theme === "light" ? "fa-moon-o" : "fa-sun-o"}`}></i>
-        </span>
-      </button>
-    </div>
+    <Button
+      className="is-pulled-right"
+      outlined="true"
+      primary="true"
+      rounded="true"
+      onClick={toggleTheme}
+    >
+      <Icon>
+        {/* <i className={`fa ${theme === "light" ? "fa-moon-o" : "fa-sun-o"}`}></i> */}
+        <i className="fa fa-lightbulb-o"></i>
+      </Icon>
+    </Button>
   );
 };
 

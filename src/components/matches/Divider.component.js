@@ -8,12 +8,12 @@ const DividerWrapper = styled.div`
   justify-content: center;
   width: 400px;
   height: 4px;
-  background-color: #848181;
+  background-color: ${props => props.theme.fontSecondary};
 `;
 
 const DividerItem = styled(animated.div)`
   height: 4px;
-  background-color: #7af1ba;
+  background-color: ${props => props.theme.primary};
   width: 50%;
   position: relative;
   cursor: pointer;

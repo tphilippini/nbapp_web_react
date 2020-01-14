@@ -25,9 +25,9 @@ const CardContainer = styled(animated.div)`
 `;
 
 const Title = styled.div`
-  color: white;
+  color: ${props => props.theme.font};
   font-size: 22px;
-  font-family: "Fugaz One", cursive;
+  /* font-family: "Fugaz One", cursive; */
   font-weight: 800;
   text-transform: uppercase;
 `;
@@ -36,7 +36,7 @@ const List = () => {
   const [matches, setMatches] = useState([]);
   const { showVideoOverlay } = useContext(VideoContext);
   const date =
-    moment().hours() < 16
+    moment().hours() < 18
       ? moment()
           .subtract(1, "d")
           .format("YYYYMMDD")

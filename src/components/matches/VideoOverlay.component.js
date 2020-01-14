@@ -23,7 +23,7 @@ const VideoOverlayWrapper = styled(animated.div)`
 
 const Content = styled.div`
   font-size: 20px;
-  font-family: "Fugaz one";
+  /* font-family: "Fugaz one"; */
   color: white;
   width: 100%;
   height: 100%;

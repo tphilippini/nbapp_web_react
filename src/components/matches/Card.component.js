@@ -15,8 +15,7 @@ const CardWrapper = styled(animated.div)`
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   user-select: none;
   height: 150px;
-  color: white;
-  background-color: #1e1e1e;
+  background-color: ${props => props.theme.box};
   border-radius: 10px;
   margin-bottom: 20px;
   width: 400px;
@@ -68,8 +67,8 @@ const Card = props => {
   };
 
   const cardHeightStyle = useSpring({
-    height: cardOpen ? "600px" : "140px",
-    from: { height: "140px" },
+    height: cardOpen ? "600px" : "120px",
+    from: { height: "120px" },
     config: config.stiff
   });
 

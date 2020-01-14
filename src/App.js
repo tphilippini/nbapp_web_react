@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
-// import Header from "./components/navigation/header.component";
-// import Landing from "./components/layouts/landing.component";
-// import Dashboard from "./components/layouts/dashboard.component";
-import NotFound from "./components/layouts/notfound.component";
 import Navbar from "./components/navbar/Navbar.component";
 
 import Landing from "./screens/Landing.screen";
 import Dashboard from "./screens/Dashboard.screen";
-
-import Login from "./components/user/Login.component";
-import Signup from "./components/user/Signup.component";
-import Account from "./components/user/Account.component";
-import Forgot from "./components/user/Forgot.component";
-import Reset from "./components/user/Reset.component";
+import Account from "./screens/Account.screen";
+import Login from "./screens/Login.screen";
+import Forgot from "./screens/Forgot.screen";
+import Signup from "./screens/Signup.screen";
+import Reset from "./screens/Reset.screen";
+import NotFound from "./screens/NotFound.screen";
 
 import UserRoute from "./components/routes/user.route";
 import GuestRoute from "./components/routes/guest.route";
