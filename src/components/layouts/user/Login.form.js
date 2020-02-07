@@ -16,7 +16,7 @@ import Message from "../../elements/Message.component";
 import AuthContext from "../../../stores/contexts/auth.context";
 import { login } from "../../../stores/actions/auth.action";
 
-const LoginForm = props => {
+const LoginForm = ({ intl, history }) => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -32,7 +32,7 @@ const LoginForm = props => {
     if (Object.keys(err).length === 0) {
       setLoading(true);
       login(user, dispatch)
-        .then(() => props.history.push("/dashboard"))
+        .then(() => history.push("/dashboard"))
         .catch(err => {
           setErrors(err.response.data.errors[0]);
           setLoading(false);
@@ -42,6 +42,8 @@ const LoginForm = props => {
 
   const validate = data => {
     const err = {};
+    // if (!Validator.isEmail(data.email))
+    //   err.email = intl.formatMessage({ id: "account.password" });
     if (!Validator.isEmail(data.email)) err.email = "This email is invalid";
     if (!data.password) err.password = "Password is mandatory";
     return err;
@@ -60,6 +62,7 @@ const LoginForm = props => {
           type="mail"
           autoFocus={true}
           placeholder="e.g. alexsmith@gmail.com"
+          // placeholder={intl.formatMessage({ id: "account.password" })}
           className={`${errors.email ? "is-danger" : ""}`}
           value={user.email}
           onChange={onChange}
@@ -69,6 +72,20 @@ const LoginForm = props => {
 
       <Field>
         <Label htmlFor="password">Mot de passe</Label>
+        {/* <FormattedMessage
+          id="app.search.placeholder"
+          defaultMessage="Search username"
+        >
+          {placeholder => (
+            <Input
+              placeholder={placeholder}
+              size="large"
+              allowClear
+              value={this.state.input}
+              onChange={this.onChange}
+            />
+          )}
+        </FormattedMessage> */}
         <Input
           id="password"
           name="password"

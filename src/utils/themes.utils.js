@@ -27,6 +27,10 @@ export default {
     fontSecondary: "#9E9E9F",
     primary: "#5f45bb",
 
+    // basic purple primary : 5f45bb
+    // nice orange/red : E11E15
+    // nice green : 2DB166
+
     success: "#48C774",
     danger: "#FB3860",
     warning: "#FB470F",

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import LocaleContext from "../../stores/contexts/locale.context";
 import { setLocalei18n } from "../../stores/actions/locale.action";
 
-import Select from "../../components/forms/Select.component";
+import Select from "../forms/Select.component";
 
 const LangSelect = () => {
   const { lang, dispatch } = useContext(LocaleContext);

@@ -1,5 +1,5 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
 import AuthContext from "../stores/contexts/auth.context";
@@ -36,7 +36,9 @@ const Title = styled.h1`
   color: ${props => props.theme.font};
 `;
 
-const Account = props => {
+const Login = props => {
+  console.log("PROPS", props.intl.formatMessage({ id: "account.login" }));
+
   return (
     <AuthContext.Consumer>
       {({ user }) => (
@@ -72,4 +74,4 @@ const Account = props => {
   );
 };
 
-export default Account;
+export default injectIntl(Login);

@@ -31,7 +31,7 @@ const Title = styled.h1`
   color: ${props => props.theme.font};
 `;
 
-const Account = props => {
+const Reset = props => {
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState(false);
 
@@ -97,4 +97,4 @@ const Account = props => {
   );
 };
 
-export default Account;
+export default Reset;
