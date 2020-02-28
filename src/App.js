@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/Navbar.component";
 
 import Landing from "./screens/Landing.screen";
 import Dashboard from "./screens/Dashboard.screen";
+import LeagueMode from "./screens/LeagueMode.screen";
 import Account from "./screens/Account.screen";
 import Login from "./screens/Login.screen";
 import Forgot from "./screens/Forgot.screen";
@@ -33,6 +34,7 @@ const App = () => {
         <GuestRoute path="/signup" exact component={Signup} />
         <GuestRoute path="/reset/:token" exact component={Reset} />
         <UserRoute path="/dashboard" exact component={Dashboard} />
+        <UserRoute path="/league/create" exact component={LeagueMode} />
         <UserRoute path="/account" exact component={Account} />
         <Route component={NotFound} />
       </Switch>

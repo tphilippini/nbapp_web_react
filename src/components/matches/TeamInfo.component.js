@@ -14,7 +14,6 @@ const TeamInfoWrapper = styled.div`
 `;
 
 const TeamName = styled(animated.div)`
-  /* font-family: "Fugaz One", cursive; */
   font-weight: 800;
   text-transform: uppercase;
 `;

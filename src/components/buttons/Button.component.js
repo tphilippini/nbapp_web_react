@@ -10,10 +10,10 @@ const Button = styled.button`
   color: #363636;
   cursor: pointer;
   justify-content: center;
-  padding-bottom: calc(0.5em - 1px);
+  padding-bottom: calc(0.4em - 1px);
   padding-left: 1em;
   padding-right: 1em;
-  padding-top: calc(0.5em - 1px);
+  padding-top: calc(0.4em - 1px);
   text-align: center;
   white-space: nowrap;
   box-shadow: none;

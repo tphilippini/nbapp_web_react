@@ -35,11 +35,14 @@ const VideoContent = styled.div`
   /* padding-top: 56.25%; */
 `;
 
-const VideoCloseButton = styled.div`
+const VideoCloseButton = styled.h1`
   text-align: center;
   padding: 20px;
   margin-top: 50px;
   cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
 `;
 
 // const VideoItemRow = styled.div`

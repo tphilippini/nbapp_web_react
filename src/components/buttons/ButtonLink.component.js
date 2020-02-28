@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import Buttons from "./Buttons.component";
 
 const ButtonLink = styled(Link)`
   background-color: #fff;
@@ -32,6 +33,13 @@ const ButtonLink = styled(Link)`
 
   &:hover {
     opacity: 0.8;
+  }
+
+  ${Buttons} & {
+    margin-bottom: 0.5rem;
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
   }
 
   ${props =>

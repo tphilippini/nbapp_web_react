@@ -22,6 +22,14 @@ export default {
     "account.new_password": "New password",
     "account.confirm_password": "Password confirmation",
 
+    "league.my_leagues": "My leagues",
+    "league.create_league": "Create league",
+    "league.join_league": "Join league",
+    "league.name": "League's name",
+    "league.duration": "League's duration",
+    "league.week_one": "{duration} Week",
+    "league.week_many": "{duration} Weeks",
+
     "utils.apply": "Apply",
     "utils.send": "Send",
     "utils.update": "Update",
@@ -51,6 +59,14 @@ export default {
     "account.password": "Mot de passe",
     "account.new_password": "Nouveau mot de passe",
     "account.confirm_password": "Confirmation mot de passe",
+
+    "league.my_leagues": "Mes ligues",
+    "league.create_league": "Créer une ligue",
+    "league.join_league": "Joindre une ligue",
+    "league.name": "Nom de ta ligue",
+    "league.duration": "Durée de ta ligue",
+    "league.week_one": "{duration} Week",
+    "league.week_many": "{duration} Weeks",
 
     "utils.apply": "Enregistrer",
     "utils.send": "Envoyer",

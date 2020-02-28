@@ -114,5 +114,9 @@ export default {
 
   match: {
     fetch: date => axios.get(`/matches/${date}`).then(res => res.data)
+  },
+
+  league: {
+    fetch: uuid => axios.get(`/leagues/${uuid}`).then(res => res.data)
   }
 };

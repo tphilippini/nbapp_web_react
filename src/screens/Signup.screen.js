@@ -7,8 +7,6 @@ import Divider from "../components/helpers/Divider.helpers";
 import SignupForm from "../components/layouts/user/Signup.form";
 import SocialForm from "../components/layouts/user/Social.form";
 import ButtonLink from "../components/buttons/ButtonLink.component";
-// import AccountProfileForm from "../components/user/AccountProfile.form";
-// import AccountPas@swordForm from "../components/user/AccountPassword.form";
 
 import Box from "../components/elements/Box.component";
 import Columns from "../components/elements/Columns.component";

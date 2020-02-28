@@ -9,8 +9,8 @@ import Card from "./Card.component";
 
 const ScrollableArea = styled(animated.div)`
   height: 100%;
-  margin-top: 5px;
-  display: ${props => (props.show === 1 ? "none" : "flex")};
+  /* margin-top: 5px; */
+  display: "flex";
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -18,16 +18,15 @@ const ScrollableArea = styled(animated.div)`
 `;
 
 const CardContainer = styled(animated.div)`
-  :first-child {
+  /* :first-child {
     margin-top: 20px;
-  }
+  } */
   display: ${props => (props.show === 1 ? "none" : "inherit")};
 `;
 
 const Title = styled.div`
   color: ${props => props.theme.font};
   font-size: 22px;
-  /* font-family: "Fugaz One", cursive; */
   font-weight: 800;
   text-transform: uppercase;
 `;
