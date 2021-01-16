@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
-import AuthContext from "../stores/contexts/auth.context";
+import UserContext from "../stores/contexts/user.context";
 import ThemeSelect from "../components/helpers/Theme.helpers";
 import LangSelect from "../components/helpers/Lang.helpers";
 import AccountProfileForm from "../components/layouts/user/AccountProfile.form";
@@ -16,7 +16,7 @@ import Column from "../components/elements/Column.component";
 const Content = styled.div`
   height: 100%;
   margin-top: 3rem;
-  /* display: ${props => (props.show === 1 ? "none" : "flex")};
+  /* display: ${(props) => (props.show === 1 ? "none" : "flex")};
   align-items: center;
   justify-content: center;
   flex-direction: column; */
@@ -34,63 +34,61 @@ const Title = styled.div`
 `;
 
 const Account = () => {
+  const { user } = useContext(UserContext);
+
   return (
-    <AuthContext.Consumer>
-      {({ user }) => (
-        <Content>
-          <Container>
+    <Content>
+      <Container>
+        <Columns>
+          <Column>
+            <Title>Bonjour {user.firstName}</Title>
+          </Column>
+          <Column className="is-2">
             <Columns>
               <Column>
-                <Title>Bonjour {user.firstName}</Title>
-              </Column>
-              <Column className="is-2">
-                <Columns>
-                  <Column>
-                    <LangSelect />
-                  </Column>
-                  <Column>
-                    <ThemeSelect />
-                  </Column>
-                </Columns>
-              </Column>
-            </Columns>
-
-            <Columns>
-              <Column>
-                <Box>
-                  <Title className="has-text-centered">
-                    <FormattedMessage
-                      id="account.information_0"
-                      default="Basic information"
-                    />
-                  </Title>
-
-                  <AccountProfileForm user={user} />
-                </Box>
+                <LangSelect />
               </Column>
               <Column>
-                <Box>
-                  <Title className="has-text-centered">
-                    <FormattedMessage
-                      id="account.information_1"
-                      default="Change password"
-                    />
-                  </Title>
-
-                  <AccountPasswordForm user={user} />
-                </Box>
+                <ThemeSelect />
               </Column>
             </Columns>
+          </Column>
+        </Columns>
 
-            <Columns vcentered="true">
-              <Column className="is-6">
-                <LinkSocialForm user={user} />
-              </Column>
-            </Columns>
-          </Container>
-        </Content>
-      )}
-    </AuthContext.Consumer>
+        <Columns>
+          <Column>
+            <Box>
+              <Title className="has-text-centered">
+                <FormattedMessage
+                  id="account.information_0"
+                  default="Basic information"
+                />
+              </Title>
+
+              <AccountProfileForm />
+            </Box>
+          </Column>
+          <Column>
+            <Box>
+              <Title className="has-text-centered">
+                <FormattedMessage
+                  id="account.information_1"
+                  default="Change password"
+                />
+              </Title>
+
+              <AccountPasswordForm />
+            </Box>
+          </Column>
+        </Columns>
+
+        <Columns vcentered="true">
+          <Column className="is-6">
+            <LinkSocialForm user={user} />
+          </Column>
+        </Columns>
+      </Container>
+    </Content>
   );
 };
 

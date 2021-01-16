@@ -7,81 +7,53 @@ import Button from "../../buttons/Button.component";
 import Icon from "../../elements/Icon.component";
 import Message from "../../elements/Message.component";
 
-import AuthContext from "../../../stores/contexts/auth.context";
-import {
-  linkGoogle,
-  linkFacebook,
-  unlinkGoogle,
-  unlinkFacebook
-} from "../../../stores/actions/user.action";
+import UserContext from "../../../stores/contexts/user.context";
+import { linkSocial, unlinkSocial } from "../../../stores/actions/user.action";
 
-const LinkSocialForm = props => {
+const LinkSocialForm = (props) => {
   const [message, setMessage] = useState({});
+  const { user, setUser } = useContext(UserContext);
 
-  const { dispatch } = useContext(AuthContext);
-
-  const onLinkingGoogle = res => {
-    linkGoogle(res.accessToken, dispatch)
-      .then(() => {
-        setMessage({
-          message: "Your account has been linked with success",
-          type: "success"
-        });
-        setTimeout(() => {
-          setMessage({});
-        }, 1000);
-      })
-      .catch(err => {
-        setMessage({ ...err.response.data.errors[0], type: "danger" });
-      });
+  const onLinkingGoogle = async (res) => {
+    const result = await linkSocial(res.accessToken, "google");
+    displayLinkSocialMessage(result);
   };
 
-  const onLinkingFacebook = res => {
-    linkFacebook(res.accessToken, dispatch)
-      .then(() => {
-        setMessage({
-          message: "Your account has been linked with success",
-          type: "success"
-        });
-        setTimeout(() => {
-          setMessage({});
-        }, 1000);
-      })
-      .catch(err => {
-        setMessage({ ...err.response.data.errors[0], type: "danger" });
-      });
+  const onLinkingFacebook = async (res) => {
+    const result = await linkSocial(res.accessToken, "facebook");
+    displayLinkSocialMessage(result);
   };
 
-  const onUnlinkingFacebook = () => {
-    unlinkFacebook(dispatch)
-      .then(() => {
-        setMessage({
-          message: "Your account has been unlinked with success",
-          type: "success"
-        });
-        setTimeout(() => {
-          setMessage({});
-        }, 1000);
-      })
-      .catch(err => {
-        setMessage({ ...err.response.data.errors[0], type: "danger" });
+  const displayLinkSocialMessage = (result) => {
+    if (result.email) {
+      setUser(result);
+      setMessage({
+        message: "Your account has been linked with success",
+        type: "success",
       });
+    } else if (result.message) setMessage({ ...result, type: "danger" });
+    else setMessage({ message: "Identifiant invalide", type: "danger" });
+
+    setTimeout(() => {
+      setMessage({});
+    }, 2000);
   };
 
-  const onUnlinkingGoogle = () => {
-    unlinkGoogle(dispatch)
-      .then(() => {
-        setMessage({
-          message: "Your account has been unlinked with success",
-          type: "success"
-        });
-        setTimeout(() => {
-          setMessage({});
-        }, 1000);
-      })
-      .catch(err => {
-        setMessage({ ...err.response.data.errors[0], type: "danger" });
+  const onUnlink = async (method) => {
+    const result = await unlinkSocial(method);
+
+    if (result.email) {
+      setUser(result);
+      setMessage({
+        message: "Your account has been unlinked with success",
+        type: "success",
       });
+    } else if (result.message) setMessage({ ...result, type: "danger" });
+    else setMessage({ message: "Identifiant invalide", type: "danger" });
+
+    setTimeout(() => {
+      setMessage({});
+    }, 2000);
   };
 
   return (
@@ -101,7 +73,7 @@ const LinkSocialForm = props => {
             facebook="true"
             outlined="true"
             small="true"
-            onClick={onUnlinkingFacebook}
+            onClick={() => onUnlink("facebook")}
           >
             <Icon>
               <i className="fa fa-facebook"></i>
@@ -114,7 +86,7 @@ const LinkSocialForm = props => {
             autoLoad={false}
             fields="name,email,picture"
             callback={onLinkingFacebook}
-            render={renderProps => (
+            render={(renderProps) => (
               <Button
                 facebook="true"
                 small="true"
@@ -134,7 +106,7 @@ const LinkSocialForm = props => {
             google="true"
             outlined="true"
             small="true"
-            onClick={onUnlinkingGoogle}
+            onClick={() => onUnlink("google")}
           >
             <Icon>
               <i className="fa fa-google"></i>
@@ -144,7 +116,7 @@ const LinkSocialForm = props => {
         ) : (
           <GoogleLogin
             clientId="1084552878641-8fga50e1ln4uf9ujvfk9roucau9b06oo.apps.googleusercontent.com"
-            render={renderProps => (
+            render={(renderProps) => (
               <Button google="true" small="true" onClick={renderProps.onClick}>
                 <Icon>
                   <i className="fa fa-google"></i>

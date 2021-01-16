@@ -5,15 +5,15 @@ import { FormattedMessage } from "react-intl";
 import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
 
-import AuthContext from "../../stores/contexts/auth.context";
-import { logout } from "../../stores/actions/auth.action";
+import UserContext from "../../stores/contexts/user.context";
+import { logout } from "../../stores/actions/user.action";
 
 import Hamburger from "./Hamburger.component";
 import Button from "../buttons/Button.component";
 import ButtonLink from "../buttons/ButtonLink.component";
 
 const NavBar = styled(animated.nav)`
-  background: ${props => props.theme.background};
+  background: ${(props) => props.theme.background};
   padding: 5px 20px;
 `;
 
@@ -41,7 +41,7 @@ const NavItem = styled.li`
   text-align: center;
   order: 3;
   display: none;
-  background: ${props => props.theme.background};
+  background: ${(props) => props.theme.background};
   z-index: 1;
 
   ${({ theme }) => theme.desktop} {
@@ -77,8 +77,8 @@ const NavItemButton = styled.li`
   width: 100%;
   text-align: center;
   order: 2;
-  display: ${props => (props.show === "1" ? "block" : "none")};
-  background: ${props => props.theme.background};
+  display: ${(props) => (props.show === "1" ? "block" : "none")};
+  background: ${(props) => props.theme.background};
   z-index: 1;
 
   /* Tablet menu */
@@ -126,89 +126,85 @@ const HamburgerWrapper = styled.li`
   }
 `;
 
-const Navbar = ({ toggleOptionsOverlay, showOptionsOverlay }) => {
-  const { dispatch } = useContext(AuthContext);
+const Navbar = (props) => {
+  const { user, setUser } = useContext(UserContext);
 
   const handleClick = () => {
-    toggleOptionsOverlay(!showOptionsOverlay);
+    props.toggleOptionsOverlay(!props.showOptionsOverlay);
   };
 
   return (
-    <AuthContext.Consumer>
-      {({ user }) => (
-        <NavBar>
-          <MenuWrapper className={showOptionsOverlay ? "active" : ""}>
-            <LogoWrapper>
-              <Link to={user && user.email ? "/dashboard" : "/"}>
-                <Title>
-                  {user && user.email ? (
-                    <FormattedMessage id="nav.dashboard" default="Dashboard" />
-                  ) : (
-                    "APPLICATION"
-                  )}
-                </Title>
-              </Link>
-            </LogoWrapper>
+    <NavBar>
+      <MenuWrapper className={props.showOptionsOverlay ? "active" : ""}>
+        <LogoWrapper>
+          <Link to={user && user.email ? "/dashboard" : "/"}>
+            <Title>
+              {user && user.email ? (
+                <FormattedMessage id="nav.dashboard" default="Dashboard" />
+              ) : (
+                "APPLICATION"
+              )}
+            </Title>
+          </Link>
+        </LogoWrapper>
 
-            {/* <NavItem className="item">
+        {/* <NavItem className="item">
               <ThemeSelect />
             </NavItem> */}
 
-            {/* <NavItem className="item">
+        {/* <NavItem className="item">
               <Link to="/">Home</Link>
-            </NavItem>
-
-            <NavItem className="item">
-              <Link to="/">About</Link>
             </NavItem> */}
 
-            {user && user.email ? (
-              <>
-                <NavItem className="item">
-                  <Link to="/account">
-                    <Avatar
-                      facebookId={user.fid ? user.fid : ""}
-                      googleId={user.gid ? user.gid : ""}
-                      name={
-                        user.firstName && user.lastName
-                          ? user.firstName + " " + user.lastName
-                          : user.alias
-                      }
-                      color="#f4f4f4"
-                      fgColor="#2d3436"
-                      size="30"
-                      round={true}
-                    />
-                  </Link>
-                </NavItem>
+        {user && user.email ? (
+          <>
+            <NavItem className="item">
+              <Link to="/account">
+                <Avatar
+                  facebookId={user.fid ? user.fid : ""}
+                  googleId={user.gid ? user.gid : ""}
+                  name={
+                    user.firstName && user.lastName
+                      ? user.firstName + " " + user.lastName
+                      : user.alias
+                  }
+                  color="#f4f4f4"
+                  fgColor="#2d3436"
+                  size="30"
+                  round={true}
+                />
+              </Link>
+            </NavItem>
 
-                <NavItemButton show={showOptionsOverlay ? "1" : "0"}>
-                  <Button
-                    primary="true"
-                    rounded="true"
-                    onClick={() => logout(dispatch)}
-                  >
-                    <FormattedMessage id="account.logout" default="Logout" />
-                  </Button>
-                </NavItemButton>
-              </>
-            ) : (
-              <>
-                <NavItemButton show={showOptionsOverlay ? "1" : "0"}>
-                  <ButtonLink primary="true" rounded="true" to="/login">
-                    <FormattedMessage id="account.login" default="Login" />
-                  </ButtonLink>
-                </NavItemButton>
-              </>
-            )}
+            <NavItemButton show={props.showOptionsOverlay ? "1" : "0"}>
+              <Button
+                primary="true"
+                rounded="true"
+                onClick={() => {
+                  logout();
+                  setUser(null);
+                  props.history.push("/");
+                }}
+              >
+                <FormattedMessage id="account.logout" default="Logout" />
+              </Button>
+            </NavItemButton>
+          </>
+        ) : (
+          <>
+            <NavItemButton show={props.showOptionsOverlay ? "1" : "0"}>
+              <ButtonLink primary="true" rounded="true" to="/login">
+                <FormattedMessage id="account.login" default="Login" />
+              </ButtonLink>
+            </NavItemButton>
+          </>
+        )}
 
-            <HamburgerWrapper>
-              <Hamburger handleClick={handleClick} />
-            </HamburgerWrapper>
-          </MenuWrapper>
-        </NavBar>
-      )}
-    </AuthContext.Consumer>
+        <HamburgerWrapper>
+          <Hamburger handleClick={handleClick} />
+        </HamburgerWrapper>
+      </MenuWrapper>
+    </NavBar>
   );
 };
 

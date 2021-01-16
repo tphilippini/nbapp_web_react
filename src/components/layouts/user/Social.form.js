@@ -8,31 +8,30 @@ import Message from "../../elements/Message.component";
 import Column from "../../elements/Column.component";
 import Columns from "../../elements/Columns.component";
 
-import AuthContext from "../../../stores/contexts/auth.context";
-import {
-  loginFacebook,
-  loginGoogle
-} from "../../../stores/actions/auth.action";
+import UserContext from "../../../stores/contexts/user.context";
+import { loginSocial } from "../../../stores/actions/user.action";
 
-const SocialForm = props => {
+const SocialForm = ({ intl, history }) => {
   const [errors, setErrors] = useState({});
 
-  const { dispatch } = useContext(AuthContext);
+  const { user, setUser } = useContext(UserContext);
 
-  const onSubmitGoogle = res => {
-    loginGoogle(res.accessToken, dispatch)
-      .then(() => props.history.push("/dashboard"))
-      .catch(err => {
-        setErrors(err.response.data.errors[0]);
-      });
+  const onSubmitGoogle = async (res) => {
+    const result = await loginSocial(res.accessToken, "google");
+    if (result.email) {
+      setUser(result);
+      history.push("/dashboard");
+    } else if (result.message) setErrors(result);
+    else setErrors({ message: "Identifiant invalide" });
   };
 
-  const onSubmitFacebook = res => {
-    loginFacebook(res.accessToken, dispatch)
-      .then(() => props.history.push("/dashboard"))
-      .catch(err => {
-        setErrors(err.response.data.errors[0]);
-      });
+  const onSubmitFacebook = async (res) => {
+    const result = await loginSocial(res.accessToken, "facebook");
+    if (result.email) {
+      setUser(result);
+      history.push("/dashboard");
+    } else if (result.message) setErrors(result);
+    else setErrors({ message: "Identifiant invalide" });
   };
 
   return (
@@ -47,7 +46,7 @@ const SocialForm = props => {
             textButton="Se connecter avec Facebook"
             fields="name,email,picture"
             callback={onSubmitFacebook}
-            render={renderProps => (
+            render={(renderProps) => (
               <Button facebook="true" onClick={renderProps.onClick}>
                 <Icon>
                   <i className="fa fa-facebook"></i>
@@ -60,7 +59,7 @@ const SocialForm = props => {
         <Column className="has-text-centered">
           <GoogleLogin
             clientId="1084552878641-8fga50e1ln4uf9ujvfk9roucau9b06oo.apps.googleusercontent.com"
-            render={renderProps => (
+            render={(renderProps) => (
               <Button
                 google="true"
                 onClick={renderProps.onClick}

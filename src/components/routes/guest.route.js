@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
-import AuthContext from "../../stores/contexts/auth.context";
+import UserContext from "../../stores/contexts/user.context";
 
-const GuestRoute = ({ component: Component, ...rest }) => (
-  <AuthContext.Consumer>
-    {({ user }) => (
-      <Route
-        render={props =>
-          user && user.email ? (
-            <Redirect to="/dashboard" />
-          ) : (
-            <Component {...props} />
-          )
-        }
-        {...rest}
-      />
-    )}
-  </AuthContext.Consumer>
-);
+const GuestRoute = ({ component: Component, ...rest }) => {
+  const { user } = useContext(UserContext);
+
+  return (
+    <Route
+      render={(props) =>
+        user && user.email ? (
+          <Redirect to="/dashboard" />
+        ) : (
+          <Component {...props} />
+        )
+      }
+      {...rest}
+    />
+  );
+};
 export default GuestRoute;

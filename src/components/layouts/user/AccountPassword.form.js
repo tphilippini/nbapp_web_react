@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { FormattedMessage } from "react-intl";
 
-import AuthContext from "../../../stores/contexts/auth.context";
+import UserContext from "../../../stores/contexts/user.context";
 import { patch } from "../../../stores/actions/user.action";
 
 import Field from "../../../components/forms/Field.component";
@@ -14,53 +14,52 @@ import Columns from "../../elements/Columns.component";
 import Column from "../../elements/Column.component";
 import Message from "../../elements/Message.component";
 
-const AccountPasswordForm = props => {
-  const [user, setUser] = useState({
+const AccountPasswordForm = () => {
+  const [credentials, setCredentials] = useState({
     password: "",
     new_password: "",
-    confirm_password: ""
+    confirm_password: "",
   });
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const { dispatch } = useContext(AuthContext);
+  const { user } = useContext(UserContext);
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) =>
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const err = validate(user);
+    const err = validate(credentials);
     setErrors(err);
     if (Object.keys(err).length === 0) {
       setLoading(true);
-      patch({ ...props.user, ...user }, "password", dispatch)
-        .then(() => {
-          setMessage({
-            text: "Your password has been updated with success",
-            type: "success"
-          });
-          setTimeout(() => {
-            setMessage({});
-            setUser({
-              password: "",
-              new_password: "",
-              confirm_password: ""
-            });
-            setLoading(false);
-          }, 1000);
-        })
-        .catch(err => {
-          setErrors(err.response.data.errors[0]);
-          setLoading(false);
-          setTimeout(() => {
-            setErrors({});
-          }, 1000);
+      const result = await patch({ ...user, ...credentials }, "password");
+      setLoading(false);
+      if (result.email) {
+        setMessage({
+          text: "Your password has been updated with success",
+          type: "success",
         });
+        setTimeout(() => {
+          setMessage({});
+          setCredentials({
+            password: "",
+            new_password: "",
+            confirm_password: "",
+          });
+        }, 2000);
+      } else {
+        setErrors(result);
+        setTimeout(() => {
+          setErrors({});
+        }, 2000);
+      }
     }
   };
 
-  const validate = data => {
+  const validate = (data) => {
     const err = {};
     if (!data.password) err.password = "Can't be blank";
     if (!data.new_password) err.new_password = "Can't be blank";
@@ -89,7 +88,7 @@ const AccountPasswordForm = props => {
           type="password"
           placeholder="your password"
           className={`${errors.password ? "is-danger" : ""}`}
-          value={user.password}
+          value={credentials.password}
           onChange={onChange}
         ></Input>
         {errors.password && (
@@ -107,7 +106,7 @@ const AccountPasswordForm = props => {
           type="password"
           placeholder="your new password"
           className={`${errors.new_password ? "is-danger" : ""}`}
-          value={user.new_password}
+          value={credentials.new_password}
           onChange={onChange}
         ></Input>
         {errors.new_password && (
@@ -128,7 +127,7 @@ const AccountPasswordForm = props => {
           type="password"
           placeholder="type it again, please"
           className={`${errors.confirm_password ? "is-danger" : ""}`}
-          value={user.confirm_password}
+          value={credentials.confirm_password}
           onChange={onChange}
         ></Input>
         {errors.confirm_password && (

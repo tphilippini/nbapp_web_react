@@ -12,34 +12,44 @@ import Columns from "../../elements/Columns.component";
 import Column from "../../elements/Column.component";
 import Message from "../../elements/Message.component";
 
-import AuthContext from "../../../stores/contexts/auth.context";
+import UserContext from "../../../stores/contexts/user.context";
 import { signup } from "../../../stores/actions/user.action";
 
-const SignupForm = props => {
-  const [user, setUser] = useState({ alias: "", email: "", password: "" });
+const SignupForm = ({ history }) => {
+  const [u, setU] = useState({ alias: "", email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const { dispatch } = useContext(AuthContext);
+  const { setUser } = useContext(UserContext);
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) => setU({ ...u, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const err = validate(user);
+    const err = validate(u);
     setErrors(err);
     if (Object.keys(err).length === 0) {
       setLoading(true);
-      signup(user, dispatch)
-        .then(() => props.history.push("/dashboard"))
-        .catch(err => {
-          setErrors(err.response.data.errors[0]);
-          setLoading(false);
-        });
+      const result = await signup(u);
+      setLoading(false);
+      if (result.email) {
+        setUser(result);
+        history.push("/dashboard");
+      } else if (result.message) {
+        setErrors(result);
+        setTimeout(() => {
+          setErrors({});
+        }, 2000);
+      } else {
+        setErrors({ message: "Désolé, une erreur est survenue..." });
+        setTimeout(() => {
+          setErrors({});
+        }, 2000);
+      }
     }
   };
 
-  const validate = data => {
+  const validate = (data) => {
     const err = {};
     if (!Validator.isEmail(data.email)) err.email = "This email is invalid";
     if (!data.password) err.password = "Password is mandatory";
@@ -61,7 +71,7 @@ const SignupForm = props => {
           autoFocus={true}
           placeholder="e.g. alexS"
           className={`${errors.alias ? "is-danger" : ""}`}
-          value={user.alias}
+          value={u.alias}
           onChange={onChange}
         ></Input>
         {errors.alias && <Help className="is-danger">{errors.alias}</Help>}
@@ -74,9 +84,10 @@ const SignupForm = props => {
         <Input
           id="email"
           name="email"
+          type="email"
           placeholder="e.g. alexsmith@gmail.com"
           className={`${errors.alias ? "is-danger" : ""}`}
-          value={user.email}
+          value={u.email}
           onChange={onChange}
         ></Input>
         {errors.email && <Help className="is-danger">{errors.email}</Help>}
@@ -92,7 +103,7 @@ const SignupForm = props => {
           type="password"
           placeholder="make it secure"
           className={`${errors.password ? "is-danger" : ""}`}
-          value={user.password}
+          value={u.password}
           onChange={onChange}
         ></Input>
         {errors.password && (

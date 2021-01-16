@@ -1,5 +1,5 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
 import ForgotForm from "../components/layouts/user/Forgot.form";
@@ -12,7 +12,7 @@ import Column from "../components/elements/Column.component";
 const Content = styled.div`
   height: 100%;
   margin-top: 3rem;
-  /* display: ${props => (props.show === 1 ? "none" : "flex")};
+  /* display: ${(props) => (props.show === 1 ? "none" : "flex")};
   align-items: center;
   justify-content: center;
   flex-direction: column; */
@@ -30,10 +30,10 @@ const Title = styled.h1`
   line-height: 1.125;
   word-break: break-word;
   text-align: center;
-  color: ${props => props.theme.font};
+  color: ${(props) => props.theme.font};
 `;
 
-const Forgot = props => {
+const Forgot = (props) => {
   return (
     <Content>
       <Container>
@@ -62,4 +62,4 @@ const Forgot = props => {
   );
 };
 
-export default Forgot;
+export default injectIntl(Forgot);

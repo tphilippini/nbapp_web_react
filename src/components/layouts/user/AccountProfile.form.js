@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 // import Validator from 'validator';
 import { FormattedMessage } from "react-intl";
 
-import AuthContext from "../../../stores/contexts/auth.context";
+import UserContext from "../../../stores/contexts/user.context";
 import { patch } from "../../../stores/actions/user.action";
 
 import Field from "../../../components/forms/Field.component";
@@ -15,44 +15,44 @@ import Columns from "../../elements/Columns.component";
 import Column from "../../elements/Column.component";
 import Message from "../../elements/Message.component";
 
-const AccountProfileForm = props => {
-  const [user, setUser] = useState({ ...props.user });
+const AccountProfileForm = () => {
+  const { user, setUser } = useContext(UserContext);
+
+  const [profile, setProfile] = useState(user);
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const { dispatch } = useContext(AuthContext);
+  const onChange = (e) =>
+    setProfile({ ...profile, [e.target.name]: e.target.value });
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
-
-  const onSubmit = e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const err = validate(user);
+    const err = validate(profile);
     setErrors(err);
     if (Object.keys(err).length === 0) {
       setLoading(true);
-      patch(user, "update", dispatch)
-        .then(() => {
-          setMessage({
-            text: "Your account has been modified with success",
-            type: "success"
-          });
-          setTimeout(() => {
-            setMessage({});
-            setLoading(false);
-          }, 1000);
-        })
-        .catch(err => {
-          setErrors(err.response.data.errors[0]);
-          setLoading(false);
-          setTimeout(() => {
-            setErrors({});
-          }, 1000);
+      const result = await patch(profile, "update");
+      setLoading(false);
+      if (result.email) {
+        setMessage({
+          text: "Your account has been modified with success",
+          type: "success",
         });
+        setUser(result);
+        setTimeout(() => {
+          setMessage({});
+        }, 1000);
+      } else {
+        setErrors(result);
+        setTimeout(() => {
+          setErrors({});
+        }, 2000);
+      }
     }
   };
 
-  const validate = data => {
+  const validate = (data) => {
     const err = {};
     // if (!Validator.isEmail(data.email)) err.email = 'This email is invalid';
     if (!data.firstName) err.firstName = "firstName is mandatory";
@@ -80,7 +80,7 @@ const AccountProfileForm = props => {
           name="alias"
           placeholder="e.g. alexS"
           className={`${errors.alias ? "is-danger" : ""}`}
-          value={user.alias}
+          value={profile.alias}
           onChange={onChange}
         ></Input>
         {errors.alias && <Help className="is-danger">{errors.alias}</Help>}
@@ -95,7 +95,7 @@ const AccountProfileForm = props => {
           name="firstName"
           placeholder="e.g. Alex"
           className={`${errors.firstName ? "is-danger" : ""}`}
-          value={user.firstName}
+          value={profile.firstName}
           onChange={onChange}
         ></Input>
         {errors.firstName && (
@@ -112,7 +112,7 @@ const AccountProfileForm = props => {
           name="lastName"
           placeholder="e.g. Smith"
           className={`${errors.lastName ? "is-danger" : ""}`}
-          value={user.lastName}
+          value={profile.lastName}
           onChange={onChange}
         ></Input>
         {errors.lastName && (
@@ -130,7 +130,7 @@ const AccountProfileForm = props => {
           type="mail"
           placeholder="e.g. alexsmith@gmail.com"
           className={`${errors.email ? "is-danger" : ""}`}
-          value={user.email}
+          value={profile.email}
           onChange={onChange}
         ></Input>
         {errors.email && (

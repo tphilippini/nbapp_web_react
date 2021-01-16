@@ -13,34 +13,36 @@ import Columns from "../../elements/Columns.component";
 import Column from "../../elements/Column.component";
 import Message from "../../elements/Message.component";
 
-import AuthContext from "../../../stores/contexts/auth.context";
-import { login } from "../../../stores/actions/auth.action";
+import UserContext from "../../../stores/contexts/user.context";
+import { login } from "../../../stores/actions/user.action";
 
 const LoginForm = ({ intl, history }) => {
-  const [user, setUser] = useState({ email: "", password: "" });
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const { dispatch } = useContext(AuthContext);
+  const { user, setUser } = useContext(UserContext);
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) =>
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const err = validate(user);
+    const err = validate(credentials);
     setErrors(err);
     if (Object.keys(err).length === 0) {
       setLoading(true);
-      login(user, dispatch)
-        .then(() => history.push("/dashboard"))
-        .catch(err => {
-          setErrors(err.response.data.errors[0]);
-          setLoading(false);
-        });
+      const result = await login(credentials);
+      setLoading(false);
+      if (result.email) {
+        setUser(result);
+        history.push("/dashboard");
+      } else if (result.message) setErrors(result);
+      else setErrors({ message: "Identifiant invalide" });
     }
   };
 
-  const validate = data => {
+  const validate = (data) => {
     const err = {};
     // if (!Validator.isEmail(data.email))
     //   err.email = intl.formatMessage({ id: "account.password" });
@@ -64,7 +66,7 @@ const LoginForm = ({ intl, history }) => {
           placeholder="e.g. alexsmith@gmail.com"
           // placeholder={intl.formatMessage({ id: "account.password" })}
           className={`${errors.email ? "is-danger" : ""}`}
-          value={user.email}
+          value={credentials.email}
           onChange={onChange}
         ></Input>
         {errors.email && <Help className="is-danger">{errors.email}</Help>}
@@ -92,7 +94,7 @@ const LoginForm = ({ intl, history }) => {
           type="password"
           placeholder="make it secure"
           className={`${errors.password ? "is-danger" : ""}`}
-          value={user.password}
+          value={credentials.password}
           onChange={onChange}
         ></Input>
         {errors.password && (

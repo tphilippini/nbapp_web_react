@@ -3,8 +3,9 @@ import React from "react";
 import LocaleProvider from "./locale.provider";
 import LoadingProvider from "./loading.provider";
 import VideoProvider from "./video.provider";
-import AuthProvider from "./auth.provider";
 import Spinner from "../../components/helpers/Spinner.helper";
+
+import UserProvider from "./user.provider";
 
 const Store = ({ children }) => {
   return (
@@ -12,7 +13,7 @@ const Store = ({ children }) => {
       <LoadingProvider>
         <VideoProvider>
           <Spinner />
-          <AuthProvider>{children}</AuthProvider>
+          <UserProvider>{children}</UserProvider>
         </VideoProvider>
       </LoadingProvider>
     </LocaleProvider>

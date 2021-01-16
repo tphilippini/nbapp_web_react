@@ -2,7 +2,6 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
-import AuthContext from "../stores/contexts/auth.context";
 import Divider from "../components/helpers/Divider.helpers";
 import SignupForm from "../components/layouts/user/Signup.form";
 import SocialForm from "../components/layouts/user/Social.form";
@@ -15,7 +14,7 @@ import Column from "../components/elements/Column.component";
 const Content = styled.div`
   height: 100%;
   margin-top: 3rem;
-  /* display: ${props => (props.show === 1 ? "none" : "flex")};
+  /* display: ${(props) => (props.show === 1 ? "none" : "flex")};
   align-items: center;
   justify-content: center;
   flex-direction: column; */
@@ -33,38 +32,34 @@ const Title = styled.h1`
   line-height: 1.125;
   word-break: break-word;
   text-align: center;
-  color: ${props => props.theme.font};
+  color: ${(props) => props.theme.font};
 `;
 
-const Signup = props => {
+const Signup = (props) => {
   return (
-    <AuthContext.Consumer>
-      {({ user }) => (
-        <Content>
-          <Container>
-            <Columns centered>
-              <Column className="is-6">
-                <Box>
-                  <Title>
-                    <FormattedMessage id="account.signup" default="Sign up" />
-                  </Title>
-                  <SocialForm {...props} />
-                  <Divider />
-                  <SignupForm {...props} />
-                </Box>
+    <Content>
+      <Container>
+        <Columns centered>
+          <Column className="is-6">
+            <Box>
+              <Title>
+                <FormattedMessage id="account.signup" default="Sign up" />
+              </Title>
+              <SocialForm {...props} />
+              <Divider />
+              <SignupForm {...props} />
+            </Box>
 
-                <ButtonLink className="is-pulled-right" text="true" to="/login">
-                  <FormattedMessage
-                    id="account.information_4"
-                    default="Already an account ? log in"
-                  />
-                </ButtonLink>
-              </Column>
-            </Columns>
-          </Container>
-        </Content>
-      )}
-    </AuthContext.Consumer>
+            <ButtonLink className="is-pulled-right" text="true" to="/login">
+              <FormattedMessage
+                id="account.information_4"
+                default="Already an account ? log in"
+              />
+            </ButtonLink>
+          </Column>
+        </Columns>
+      </Container>
+    </Content>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import Validator from "validator";
 
-import { forgot } from "../../../stores/actions/auth.action";
+import { forgot } from "../../../stores/actions/user.action";
 
 import Field from "../../../components/forms/Field.component";
 import Label from "../../../components/forms/Label.component";
@@ -15,43 +15,41 @@ import Columns from "../../elements/Columns.component";
 import Column from "../../elements/Column.component";
 import Message from "../../elements/Message.component";
 
-const ForgotForm = props => {
+const ForgotForm = ({ intl, history }) => {
   const [user, setUser] = useState({ email: "" });
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const err = validate(user);
     setErrors(err);
     if (Object.keys(err).length === 0) {
       setLoading(true);
-      forgot(user)
-        .then(() => {
-          setMessage({
-            text: "An email has been sent with success",
-            type: "success"
-          });
-          setTimeout(() => {
-            setMessage({});
-            setLoading(false);
-            props.history.push("/login");
-          }, 1000);
-        })
-        .catch(err => {
-          setErrors(err.response.data.errors[0]);
-          setLoading(false);
-          setTimeout(() => {
-            setErrors({});
-          }, 1000);
+      const result = await forgot(user);
+      setLoading(false);
+      if (result.success) {
+        setMessage({
+          text: result.message,
+          type: "success",
         });
+        setTimeout(() => {
+          setMessage({});
+          history.push("/login");
+        }, 5000);
+      } else {
+        setErrors(result.errors[0]);
+        setTimeout(() => {
+          setErrors({});
+        }, 2000);
+      }
     }
   };
 
-  const validate = data => {
+  const validate = (data) => {
     const err = {};
     if (!Validator.isEmail(data.email)) err.email = "This email is invalid";
     return err;

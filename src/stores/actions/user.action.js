@@ -1,45 +1,90 @@
-import { USER_FETCHED } from './types.action';
-import { userLoggedIn } from './auth.action';
-import api from './api.action';
+import api from "./api.action";
+import setAuthorizationHeader from "../../utils/setAuthorizationHeader.utils";
 
-export const userFetched = user => ({
-  type: USER_FETCHED,
-  user
-});
+export const login = async (credentials) => {
+  const result = await api.user.login(credentials);
+  if (result.success) {
+    const user = result.data[0];
+    localStorage.USER_DATA = user.access_token;
+    setAuthorizationHeader(localStorage.USER_DATA);
+    return {
+      uuid: user.uuid,
+      email: user.email,
+      alias: user.alias,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      methods: user.methods,
+    };
+  }
+  return result.errors[0];
+};
 
-export const signup = (data, dispatch) =>
-  api.user.signup(data).then(result => {
-    localStorage.USER_DATA = result.access_token;
-    dispatch(userLoggedIn({ email: result.email, alias: result.alias }));
-  });
+export const loginSocial = async (token, method) => {
+  const result = await api.user.loginSocial(token, method);
+  if (result.success) {
+    const user = result.data[0];
+    localStorage.USER_DATA = user.access_token;
+    setAuthorizationHeader(localStorage.USER_DATA);
+    return {
+      uuid: user.uuid,
+      email: user.email,
+      alias: user.alias,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      methods: user.methods,
+    };
+  }
+  return result.errors[0];
+};
 
-export const fetchCurrentUser = dispatch =>
-  api.user.fetchCurrentUser().then(result => {
-    if (result.email && result.alias) dispatch(userFetched(result));
-  });
+export const logout = () => {
+  localStorage.removeItem("USER_DATA");
+  setAuthorizationHeader();
+};
 
-export const patch = (data, type, dispatch) =>
-  api.user.patch(data, type).then(result => {
-    if (result.email && result.alias) dispatch(userFetched(result));
-  });
+export const forgot = async (data) => {
+  const result = await api.user.forgot(data);
+  return result;
+};
 
-export const linkGoogle = (token, dispatch) =>
-  api.user.linkGoogle(token).then(result => {
-    dispatch(userFetched(result));
-  });
+export const reset = (data) => api.user.reset(data);
 
-export const linkFacebook = (token, dispatch) =>
-  api.user.linkFacebook(token).then(result => {
-    dispatch(userFetched(result));
-  });
+export const validateToken = (token) => api.user.validateToken(token);
 
-export const unlinkGoogle = dispatch =>
-  api.user.unlinkGoogle().then(result => {
-    dispatch(userFetched(result));
-  });
+export const signup = async (data) => {
+  const result = await api.user.signup(data);
+  if (result.success) {
+    localStorage.USER_DATA = result.data[0].access_token;
+    setAuthorizationHeader(localStorage.USER_DATA);
+    return result.data[0];
+  }
+  return result.errors[0];
+};
 
-export const unlinkFacebook = dispatch =>
-  api.user.unlinkFacebook().then(result => {
-    console.log('UNLINK', result);
-    dispatch(userFetched(result));
-  });
+export const fetchUser = async () => {
+  const result = await api.user.fetchCurrentUser();
+  if (result.success) return result.data[0];
+  return null;
+};
+
+export const patch = async (data, type) => {
+  const result = await api.user.patch(data, type);
+  if (result.success) return result.data[0];
+  return result.errors[0];
+};
+
+export const linkSocial = async (token, method) => {
+  if (!["google", "facebook"].includes(method)) return null;
+
+  const result = await api.user.linkSocial(token, method);
+  if (result.success) return result.data[0];
+  return result.errors[0];
+};
+
+export const unlinkSocial = async (method) => {
+  if (!["google", "facebook"].includes(method)) return null;
+
+  const result = await api.user.unlinkSocial(method);
+  if (result.success) return result.data[0];
+  return result.errors[0];
+};
