@@ -37,7 +37,7 @@ const AccountPasswordForm = () => {
       setLoading(true);
       const result = await patch({ ...user, ...credentials }, "password");
       setLoading(false);
-      if (result.email) {
+      if (result?.email) {
         setMessage({
           text: "Your password has been updated with success",
           type: "success",

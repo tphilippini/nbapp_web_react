@@ -10,7 +10,7 @@ import Columns from "../components/elements/Columns.component";
 import Column from "../components/elements/Column.component";
 import Message from "../components/elements/Message.component";
 
-import { validateToken } from "../stores/actions/auth.action";
+import { validateToken } from "../stores/actions/user.action";
 
 const Content = styled.div`
   height: 100%;
@@ -28,10 +28,10 @@ const Title = styled.h1`
   line-height: 1.125;
   word-break: break-word;
   text-align: center;
-  color: ${props => props.theme.font};
+  color: ${(props) => props.theme.font};
 `;
 
-const Reset = props => {
+const Reset = (props) => {
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState(false);
 

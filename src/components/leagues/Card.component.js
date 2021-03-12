@@ -1,6 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { animated } from "react-spring";
+
+import ButtonLink from "../buttons/ButtonLink.component";
 
 const CardWrapper = styled(animated.div)`
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -24,14 +26,25 @@ const LeagueName = styled(animated.div)`
   text-align: center;
 `;
 
-const Card = props => {
+const Text = styled.p`
+  font-size: 9px;
+  text-align: left;
+`;
+
+const Card = ({ history, leagueId, name, weeks, password, statusNum }) => {
   const onCardClick = () => {
     console.log("click");
   };
 
   return (
     <CardWrapper onClick={onCardClick}>
-      <LeagueName>{props.name}</LeagueName>
+      <ButtonLink text="true" to={`/league/${leagueId}/settings`}>
+        Settings
+      </ButtonLink>
+      <LeagueName>{name}</LeagueName>
+      <Text>Weeks : {weeks}</Text>
+      <Text>Password : {password}</Text>
+      <Text>Status : {statusNum}</Text>
     </CardWrapper>
   );
 };

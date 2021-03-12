@@ -8,12 +8,16 @@ const DividerWrapper = styled.div`
   justify-content: center;
   width: 400px;
   height: 4px;
-  background-color: ${props => props.theme.fontSecondary};
+  background-color: ${(props) => props.theme.fontSecondary};
+
+  @media (max-width: 769px) {
+    width: 350px;
+  }
 `;
 
 const DividerItem = styled(animated.div)`
   height: 4px;
-  background-color: ${props => props.theme.primary};
+  background-color: ${(props) => props.theme.primary};
   width: 50%;
   position: relative;
   cursor: pointer;
@@ -23,14 +27,14 @@ const Divider = ({ homeSelected, toggleDivider }) => {
   const dividerStyle = useSpring({
     left: homeSelected ? -100 : 100,
     from: { left: homeSelected ? -100 : 100 },
-    config: { mass: 1, tension: 450, friction: 80 }
+    config: { mass: 1, tension: 450, friction: 80 },
   });
 
   return (
     <DividerWrapper>
       <DividerItem
         style={dividerStyle}
-        onClick={event => toggleDivider(event)}
+        onClick={(event) => toggleDivider(event)}
       />
     </DividerWrapper>
   );

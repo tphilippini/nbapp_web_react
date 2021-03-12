@@ -27,15 +27,15 @@ export default {
     "league.join_league": "Join league",
     "league.name": "League's name",
     "league.duration": "League's duration",
-    "league.week_one": "{duration} Week",
-    "league.week_many": "{duration} Weeks",
+    "league.week": `{items} {items, plural, one {week} other {weeks}}`,
 
     "utils.apply": "Apply",
     "utils.send": "Send",
     "utils.update": "Update",
     "utils.loading": "Loading...",
     "utils.invalid_access": "Invalid access...",
-    "utils.back": "Retour"
+    "utils.error_occured": "Sorry, an error occurred...",
+    "utils.back": "Back",
   },
   fr: {
     "nav.dashboard": "Tableau de bord",
@@ -65,14 +65,14 @@ export default {
     "league.join_league": "Joindre une ligue",
     "league.name": "Nom de ta ligue",
     "league.duration": "Durée de ta ligue",
-    "league.week_one": "{duration} Week",
-    "league.week_many": "{duration} Weeks",
+    "league.week": `{items} {items, plural, one {semaine} other {semaines}}`,
 
     "utils.apply": "Enregistrer",
     "utils.send": "Envoyer",
     "utils.update": "Mise à jour",
     "utils.loading": "Chargement...",
     "utils.invalid_access": "Accès non valide...",
-    "utils.back": "Retour"
-  }
+    "utils.error_occured": "Désolé, une erreur est survenue...",
+    "utils.back": "Retour",
+  },
 };

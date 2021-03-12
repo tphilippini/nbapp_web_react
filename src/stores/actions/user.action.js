@@ -16,7 +16,7 @@ export const login = async (credentials) => {
       methods: user.methods,
     };
   }
-  return result.errors[0];
+  return result.errors ? result.errors[0] : null;
 };
 
 export const loginSocial = async (token, method) => {
@@ -62,8 +62,8 @@ export const signup = async (data) => {
 };
 
 export const fetchUser = async () => {
-  const result = await api.user.fetchCurrentUser();
-  if (result.success) return result.data[0];
+  // const result = await api.user.fetchCurrentUser();
+  // if (result.success) return result.data[0];
   return null;
 };
 

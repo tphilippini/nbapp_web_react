@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { reset } from "../../../stores/actions/auth.action";
+import { reset } from "../../../stores/actions/user.action";
 
 import Field from "../../../components/forms/Field.component";
 import Label from "../../../components/forms/Label.component";
@@ -12,20 +12,20 @@ import Columns from "../../elements/Columns.component";
 import Column from "../../elements/Column.component";
 import Message from "../../elements/Message.component";
 
-const ResetForm = props => {
+const ResetForm = (props) => {
   const [user, setUser] = useState({
     token: props.token,
     password: "",
-    confirm_password: ""
+    confirm_password: "",
   });
 
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     const err = validate(user);
     setErrors(err);
@@ -35,7 +35,7 @@ const ResetForm = props => {
         .then(() => {
           setMessage({
             text: "Your password has been updated with success",
-            type: "success"
+            type: "success",
           });
           setTimeout(() => {
             setMessage({});
@@ -43,14 +43,14 @@ const ResetForm = props => {
             props.history.push("/login");
           }, 1000);
         })
-        .catch(err => {
+        .catch((err) => {
           setErrors(err.response.data.errors[0]);
           setLoading(false);
         });
     }
   };
 
-  const validate = data => {
+  const validate = (data) => {
     const err = {};
     if (!data.password) err.password = "Can't be blank";
     if (!data.confirm_password) err.confirm_password = "Can't be blank";

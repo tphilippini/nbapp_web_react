@@ -9,13 +9,17 @@ const TeamInfoWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   max-width: 50px;
-  margin-left: ${props => (!props.home ? "60px" : "0px")};
-  margin-right: ${props => (props.home ? "60px" : "0px")};
+  margin-left: ${(props) => (!props.home ? "60px" : "0px")};
+  margin-right: ${(props) => (props.home ? "60px" : "0px")};
 `;
 
 const TeamName = styled(animated.div)`
   font-weight: 800;
   text-transform: uppercase;
+
+  @media (max-width: 769px) {
+    font-size: 14px !important;
+  }
 `;
 
 const Score = styled(animated.span)`
@@ -25,7 +29,7 @@ const Score = styled(animated.span)`
 const TeamRecord = styled.span`
   /* font-family: "Fugaz One", cursive; */
   /* color: #848181; */
-  color: ${props => props.theme.fontSecondary};
+  color: ${(props) => props.theme.fontSecondary};
   font-size: 10px;
 `;
 
@@ -38,9 +42,9 @@ const TeamInfo = ({
   toggleDivider,
   cardOpen,
   homeSelected,
-  home
+  home,
 }) => {
-  const handleClick = event => {
+  const handleClick = (event) => {
     homeSelected && !home && cardOpen && toggleDivider(event);
     !homeSelected && home && cardOpen && toggleDivider(event);
     cardOpen && event.stopPropagation();

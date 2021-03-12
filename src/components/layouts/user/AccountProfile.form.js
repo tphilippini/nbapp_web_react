@@ -34,7 +34,7 @@ const AccountProfileForm = () => {
       setLoading(true);
       const result = await patch(profile, "update");
       setLoading(false);
-      if (result.email) {
+      if (result?.email) {
         setMessage({
           text: "Your account has been modified with success",
           type: "success",

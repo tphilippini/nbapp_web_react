@@ -140,9 +140,9 @@ const Navbar = (props) => {
           <Link to={user && user.email ? "/dashboard" : "/"}>
             <Title>
               {user && user.email ? (
-                <FormattedMessage id="nav.dashboard" default="Dashboard" />
+                <FormattedMessage id='nav.dashboard' default='Dashboard' />
               ) : (
-                "APPLICATION"
+                "NBA APPLICATION"
               )}
             </Title>
           </Link>
@@ -158,8 +158,8 @@ const Navbar = (props) => {
 
         {user && user.email ? (
           <>
-            <NavItem className="item">
-              <Link to="/account">
+            <NavItem className='item'>
+              <Link to='/account'>
                 <Avatar
                   facebookId={user.fid ? user.fid : ""}
                   googleId={user.gid ? user.gid : ""}
@@ -168,9 +168,9 @@ const Navbar = (props) => {
                       ? user.firstName + " " + user.lastName
                       : user.alias
                   }
-                  color="#f4f4f4"
-                  fgColor="#2d3436"
-                  size="30"
+                  color='#f4f4f4'
+                  fgColor='#2d3436'
+                  size='30'
                   round={true}
                 />
               </Link>
@@ -178,25 +178,25 @@ const Navbar = (props) => {
 
             <NavItemButton show={props.showOptionsOverlay ? "1" : "0"}>
               <Button
-                primary="true"
-                rounded="true"
+                primary='true'
+                rounded='true'
                 onClick={() => {
                   logout();
                   setUser(null);
                   props.history.push("/");
                 }}
               >
-                <FormattedMessage id="account.logout" default="Logout" />
+                <FormattedMessage id='account.logout' default='Logout' />
               </Button>
             </NavItemButton>
           </>
         ) : (
           <>
-            <NavItemButton show={props.showOptionsOverlay ? "1" : "0"}>
+            {/* <NavItemButton show={props.showOptionsOverlay ? "1" : "0"}>
               <ButtonLink primary="true" rounded="true" to="/login">
                 <FormattedMessage id="account.login" default="Login" />
               </ButtonLink>
-            </NavItemButton>
+            </NavItemButton> */}
           </>
         )}
 

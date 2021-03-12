@@ -39,7 +39,7 @@ const LiveIndicator = styled.span`
   height: 6px;
   border-radius: 50%;
   box-shadow: 0 0 5px 1px #ee2a2aa3;
-  animation: ${pulse} 3s ease-in-out infinite;
+  animation: ${pulse} 2s ease-in-out infinite;
 `;
 
 // const HighLights = styled.div`
@@ -70,7 +70,7 @@ const Caret = styled.div`
   padding-right: 10px;
   padding-left: 10px;
   transition: transform 0.3s ease-in-out;
-  ${props =>
+  ${(props) =>
     props.cardOpen &&
     css`
       transform: rotate(180deg);

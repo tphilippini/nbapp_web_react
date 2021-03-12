@@ -21,63 +21,77 @@ const CardContainer = styled(animated.div)`
   /* :first-child {
     margin-top: 20px;
   } */
-  display: ${props => (props.show === 1 ? "none" : "inherit")};
+  display: ${(props) => (props.show === 1 ? "none" : "inherit")};
 `;
 
 const Title = styled.div`
-  color: ${props => props.theme.font};
-  font-size: 22px;
+  color: ${(props) => props.theme.font};
+  font-size: 18px;
   font-weight: 800;
   text-transform: uppercase;
+  text-align: center;
 `;
 
 const List = () => {
   const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [refreshInterval, setRefreshInterval] = useState(60000);
   const { showVideoOverlay } = useContext(VideoContext);
   const date =
     moment().hours() < 18
-      ? moment()
-          .subtract(1, "d")
-          .format("YYYYMMDD")
+      ? moment().subtract(1, "d").format("YYYYMMDD")
       : moment().format("YYYYMMDD");
 
-  useEffect(() => {
+  const fetchData = () => {
+    console.log("fetching...");
+    setLoading(true);
     api.match
       .fetch(date)
-      .then(res => {
+      .then((res) => {
+        setLoading(false);
         setMatches(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
+        setLoading(false);
         console.log("ERR", err);
       });
+  };
 
-    // eslint-disable-next-line
+  useEffect(() => {
+    /*if (refreshInterval && refreshInterval > 0) {
+      const interval = setInterval(fetchData, refreshInterval);
+      return () => clearInterval(interval);
+    }*/
+    fetchData();
   }, []);
+  // }, [refreshInterval]);
 
   return (
     <ScrollableArea>
-      {matches.length ? (
+      {loading ? (
+        <Title>Chargement...</Title>
+      ) : matches.length ? (
         <Trail
           native
           items={matches}
           from={{
             opacity: 0,
-            transform: "translateX(-100px)"
+            transform: "translateX(-100px)",
           }}
           to={{
             opacity: 1,
-            transform: "translateX(0px)"
+            transform: "translateX(0px)",
           }}
-          keys={item => item.matchId}
+          keys={(item) => item.matchId}
         >
-          {(item, index) => props => (
+          {(item, index) => (props) => (
             <CardContainer show={showVideoOverlay ? 1 : 0}>
               <Card {...item} key={index} />
             </CardContainer>
           )}
         </Trail>
       ) : (
-        <Title>No game today</Title>
+        <Title>Aucun match aujourd'hui</Title>
       )}
     </ScrollableArea>
   );

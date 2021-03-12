@@ -34,11 +34,16 @@ const LoginForm = ({ intl, history }) => {
       setLoading(true);
       const result = await login(credentials);
       setLoading(false);
-      if (result.email) {
+      if (result?.email) {
         setUser(result);
         history.push("/dashboard");
-      } else if (result.message) setErrors(result);
-      else setErrors({ message: "Identifiant invalide" });
+      } else if (result?.message) setErrors(result);
+      else {
+        setErrors({ message: "Identifiant invalide" });
+        setTimeout(() => {
+          setErrors({});
+        }, 2000);
+      }
     }
   };
 

@@ -15,13 +15,17 @@ const CardWrapper = styled(animated.div)`
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   user-select: none;
   height: 150px;
-  background-color: ${props => props.theme.box};
+  background-color: ${(props) => props.theme.box};
   border-radius: 10px;
   margin-bottom: 20px;
   width: 400px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
+
+  @media (max-width: 769px) {
+    width: 350px;
+  }
 `;
 
 const CardContent = styled.div`
@@ -40,7 +44,7 @@ const CardCenter = styled.div`
   align-items: center;
 `;
 
-const Card = props => {
+const Card = (props) => {
   let [cardOpen, toggleCardOpen] = useState(false);
   let [homeSelected, toggleDivider] = useState(true);
 
@@ -53,13 +57,13 @@ const Card = props => {
     */
   };
 
-  const handleToggleOnClick = event => {
+  const handleToggleOnClick = (event) => {
     event.stopPropagation();
     toggleDivider(!homeSelected);
   };
 
   const sortMatchStats = (matchStats, teamId) => {
-    return matchStats.filter(stat => {
+    return matchStats.filter((stat) => {
       if (stat.player) {
         return stat.player.teamId === teamId;
       } else return null;
@@ -69,19 +73,19 @@ const Card = props => {
   const cardHeightStyle = useSpring({
     height: cardOpen ? "600px" : "120px",
     from: { height: "120px" },
-    config: config.stiff
+    config: config.stiff,
   });
 
   const teamNameStyle = useSpring({
     fontSize: cardOpen ? 16 : 20,
     from: { fontSize: 20 },
-    config: config.stiff
+    config: config.stiff,
   });
 
   const scoreStyle = useSpring({
     fontSize: cardOpen ? 18 : 24,
     from: { fontSize: 24 },
-    config: config.stiff
+    config: config.stiff,
   });
 
   const scoreTableStyle = useSpring({
@@ -89,7 +93,7 @@ const Card = props => {
     display: cardOpen ? "inherit" : "none",
     marginTop: 5,
     from: { opacity: 0, display: "none" },
-    config: config.stiff
+    config: config.stiff,
   });
 
   const formatTime = (
@@ -98,7 +102,7 @@ const Card = props => {
     statusNum,
     isHalfTime,
     isEndOfPeriod,
-    startTimeUTC
+    startTimeUTCString
   ) => {
     if (statusNum === 3) {
       return "FINAL";
@@ -107,7 +111,7 @@ const Card = props => {
     } else if (isEndOfPeriod) {
       return `END OF Q${currentPeriod}`;
     } else if (statusNum === 1) {
-      let gameTimeDate = new Date(parseInt(startTimeUTC));
+      let gameTimeDate = new Date(startTimeUTCString);
       let hours = gameTimeDate.getHours();
       let minutes = gameTimeDate.getMinutes();
       return `${hours}:${minutes === 0 ? "00" : minutes}`;
@@ -147,7 +151,7 @@ const Card = props => {
               props.statusNum,
               props.isHalfTime,
               props.isEndofPeriod,
-              props.startTimeUTC
+              props.startTimeUTCString
             )}
           />
           <animated.div style={scoreTableStyle}>

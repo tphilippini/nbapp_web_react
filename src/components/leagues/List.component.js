@@ -8,14 +8,8 @@ import VideoContext from "../../stores/contexts/video.context";
 
 import Columns from "../elements/Columns.component";
 import Column from "../elements/Column.component";
+import Message from "../elements/Message.component";
 import LeagueCard from "./Card.component";
-
-const Title = styled.div`
-  color: ${props => props.theme.font};
-  font-size: 22px;
-  font-weight: 800;
-  text-transform: uppercase;
-`;
 
 const List = props => {
   const [user] = useState({ ...props.user });
@@ -36,32 +30,34 @@ const List = props => {
   }, []);
 
   return (
-    <Columns show={showVideoOverlay ? 1 : 0} className="is-multiline">
+    <div show={showVideoOverlay ? 1 : 0}>
       {leagues.length ? (
-        <Trail
-          native
-          items={leagues}
-          from={{
-            opacity: 0,
-            transform: "translateX(-100px)"
-          }}
-          to={{
-            opacity: 1,
-            transform: "translateX(0px)"
-          }}
-          key={item => item.leagueId}
-          keys={item => item.leagueId}
-        >
-          {(item, index) => props => (
-            <Column className="is-4" key={index}>
-              <LeagueCard {...item} />
-            </Column>
-          )}
-        </Trail>
+        <Columns className="is-multiline">
+          <Trail
+            native
+            items={leagues}
+            from={{
+              opacity: 0,
+              transform: "translateX(-100px)"
+            }}
+            to={{
+              opacity: 1,
+              transform: "translateX(0px)"
+            }}
+            key={item => item.leagueId}
+            keys={item => item.leagueId}
+          >
+            {(item, index) => () => (
+              <Column className="is-4" key={index}>
+                <LeagueCard {...item} {...props} />
+              </Column>
+            )}
+          </Trail>
+        </Columns>
       ) : (
-        <Title>No league / creer une ligue / rejoindre une ligue</Title>
+        <Message className="is-primary">Aucune ligue</Message>
       )}
-    </Columns>
+    </div>
   );
 };
 

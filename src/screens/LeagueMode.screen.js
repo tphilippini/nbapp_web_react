@@ -18,7 +18,7 @@ const Title = styled.h1`
   color: ${props => props.theme.font};
 `;
 
-const LeagueMode = () => {
+const LeagueMode = props => {
   return (
     <Container>
       <Columns centered>
@@ -28,7 +28,7 @@ const LeagueMode = () => {
               <FormattedMessage id="league.create_league" />
             </Title>
             <Divider />
-            <CreateForm />
+            <CreateForm {...props} />
           </Box>
         </Column>
       </Columns>
