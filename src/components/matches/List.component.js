@@ -71,7 +71,7 @@ const List = () => {
     <ScrollableArea>
       {loading ? (
         <Title>Chargement...</Title>
-      ) : matches.length ? (
+      ) : matches?.length > 0 ? (
         <Trail
           native
           items={matches}
