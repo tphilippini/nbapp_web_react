@@ -7,7 +7,7 @@ import "font-awesome/css/font-awesome.min.css";
 import App from "./App";
 import Store from "./stores/providers/store.provider";
 import * as serviceWorker from "./serviceWorker";
-import "./index.scss";
+// import "./index.scss";
 
 ReactDOM.render(
   <BrowserRouter>
