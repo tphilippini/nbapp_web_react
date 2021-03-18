@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { animated } from "react-spring";
-import { FormattedMessage } from "react-intl";
-import Avatar from "react-avatar";
-import { Link } from "react-router-dom";
+// import { FormattedMessage } from "react-intl";
+// import Avatar from "react-avatar";
+// import { Link } from "react-router-dom";
 
-import UserContext from "../../stores/contexts/user.context";
-import { logout } from "../../stores/actions/user.action";
+// import UserContext from "../../stores/contexts/user.context";
+// import { logout } from "../../stores/actions/user.action";
 
-import Hamburger from "./Hamburger.component";
-import Button from "../buttons/Button.component";
-import ButtonLink from "../buttons/ButtonLink.component";
+// import Hamburger from "./Hamburger.component";
+// import Button from "../buttons/Button.component";
+// import ButtonLink from "../buttons/ButtonLink.component";
 
 const NavBar = styled(animated.nav)`
   background: ${(props) => props.theme.background};
@@ -33,24 +33,24 @@ const MenuWrapper = styled(animated.ul)`
   }
 `;
 
-const NavItem = styled.li`
-  font-size: 16px;
-  padding: 15px 5px;
-  white-space: nowrap;
-  width: 100%;
-  text-align: center;
-  order: 3;
-  display: none;
-  background: ${(props) => props.theme.background};
-  z-index: 1;
+// const NavItem = styled.li`
+//   font-size: 16px;
+//   padding: 15px 5px;
+//   white-space: nowrap;
+//   width: 100%;
+//   text-align: center;
+//   order: 3;
+//   display: none;
+//   background: ${(props) => props.theme.background};
+//   z-index: 1;
 
-  ${({ theme }) => theme.desktop} {
-    padding: 15px 10px;
-    display: block;
-    width: auto;
-    order: 1;
-  }
-`;
+//   ${({ theme }) => theme.desktop} {
+//     padding: 15px 10px;
+//     display: block;
+//     width: auto;
+//     order: 1;
+//   }
+// `;
 
 const LogoWrapper = styled.li`
   font-size: 20px;
@@ -70,33 +70,33 @@ const LogoWrapper = styled.li`
   }
 `;
 
-const NavItemButton = styled.li`
-  font-size: 16px;
-  padding: 15px 5px;
-  white-space: nowrap;
-  width: 100%;
-  text-align: center;
-  order: 2;
-  display: ${(props) => (props.show === "1" ? "block" : "none")};
-  background: ${(props) => props.theme.background};
-  z-index: 1;
+// const NavItemButton = styled.li`
+//   font-size: 16px;
+//   padding: 15px 5px;
+//   white-space: nowrap;
+//   width: 100%;
+//   text-align: center;
+//   order: 2;
+//   display: ${(props) => (props.show === "1" ? "block" : "none")};
+//   background: ${(props) => props.theme.background};
+//   z-index: 1;
 
-  /* Tablet menu */
-  ${({ theme }) => theme.tablet} {
-    width: auto;
-    order: 1;
-    display: block;
-  }
+//   /* Tablet menu */
+//   ${({ theme }) => theme.tablet} {
+//     width: auto;
+//     order: 1;
+//     display: block;
+//   }
 
-  /* Desktop menu */
-  ${({ theme }) => theme.desktop} {
-    padding: 15px 10px;
-    display: block;
-    width: auto;
-    order: 2;
-    padding-right: 0;
-  }
-`;
+//   /* Desktop menu */
+//   ${({ theme }) => theme.desktop} {
+//     padding: 15px 10px;
+//     display: block;
+//     width: auto;
+//     order: 2;
+//     padding-right: 0;
+//   }
+// `;
 
 const Title = styled.span`
   font-weight: 800;
@@ -104,48 +104,49 @@ const Title = styled.span`
   text-transform: uppercase;
 `;
 
-const HamburgerWrapper = styled.li`
-  padding: 15px 5px;
-  white-space: nowrap;
-  order: 1;
-  display: block;
-  font-size: 20px;
+// const HamburgerWrapper = styled.li`
+//   padding: 15px 5px;
+//   white-space: nowrap;
+//   order: 1;
+//   display: block;
+//   font-size: 20px;
 
-  /* Tablet menu */
-  ${({ theme }) => theme.tablet} {
-    flex: 1;
-    text-align: right;
+//   /* Tablet menu */
+//   ${({ theme }) => theme.tablet} {
+//     flex: 1;
+//     text-align: right;
 
-    order: 2;
-  }
+//     order: 2;
+//   }
 
-  /* Desktop menu */
-  ${({ theme }) => theme.desktop} {
-    padding: 15px 10px;
-    display: none;
-  }
-`;
+//   /* Desktop menu */
+//   ${({ theme }) => theme.desktop} {
+//     padding: 15px 10px;
+//     display: none;
+//   }
+// `;
 
 const Navbar = (props) => {
-  const { user, setUser } = useContext(UserContext);
+  // const { user, setUser } = useContext(UserContext);
 
-  const handleClick = () => {
-    props.toggleOptionsOverlay(!props.showOptionsOverlay);
-  };
+  // const handleClick = () => {
+  //   props.toggleOptionsOverlay(!props.showOptionsOverlay);
+  // };
 
   return (
     <NavBar>
       <MenuWrapper className={props.showOptionsOverlay ? "active" : ""}>
         <LogoWrapper>
-          <Link to={user && user.email ? "/dashboard" : "/"}>
-            <Title>
-              {user && user.email ? (
+          {/* <Link to={user && user.email ? "/dashboard" : "/"}> */}
+          <Title>
+            {/* {user && user.email ? (
                 <FormattedMessage id='nav.dashboard' default='Dashboard' />
               ) : (
                 "NBA APPLICATION"
-              )}
-            </Title>
-          </Link>
+              )} */}
+            NBA APPLICATION
+          </Title>
+          {/* </Link> */}
         </LogoWrapper>
 
         {/* <NavItem className="item">
@@ -156,7 +157,7 @@ const Navbar = (props) => {
               <Link to="/">Home</Link>
             </NavItem> */}
 
-        {user && user.email ? (
+        {/* {user && user.email ? (
           <>
             <NavItem className='item'>
               <Link to='/account'>
@@ -192,17 +193,17 @@ const Navbar = (props) => {
           </>
         ) : (
           <>
-            {/* <NavItemButton show={props.showOptionsOverlay ? "1" : "0"}>
+            { <NavItemButton show={props.showOptionsOverlay ? "1" : "0"}>
               <ButtonLink primary="true" rounded="true" to="/login">
                 <FormattedMessage id="account.login" default="Login" />
               </ButtonLink>
-            </NavItemButton> */}
+            </NavItemButton>}
           </>
         )}
 
         <HamburgerWrapper>
           <Hamburger handleClick={handleClick} />
-        </HamburgerWrapper>
+        </HamburgerWrapper> */}
       </MenuWrapper>
     </NavBar>
   );

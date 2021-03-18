@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css, keyframes } from "styled-components";
+import styled from "styled-components";
 import { animated } from "react-spring";
 
 import ButtonLink from "../buttons/ButtonLink.component";
@@ -7,8 +7,8 @@ import ButtonLink from "../buttons/ButtonLink.component";
 const CardWrapper = styled(animated.div)`
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   user-select: none;
-  background-color: ${props => props.theme.box};
-  /* background: url(${props => props.bg}) no-repeat;
+  background-color: ${(props) => props.theme.box};
+  /* background: url(${(props) => props.bg}) no-repeat;
   background-size: cover;
   background-position: top center; */
   width: 100%;
@@ -38,7 +38,7 @@ const Card = ({ history, leagueId, name, weeks, password, statusNum }) => {
 
   return (
     <CardWrapper onClick={onCardClick}>
-      <ButtonLink text="true" to={`/league/${leagueId}/settings`}>
+      <ButtonLink text='true' to={`/league/${leagueId}/settings`}>
         Settings
       </ButtonLink>
       <LeagueName>{name}</LeagueName>

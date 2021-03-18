@@ -35,7 +35,7 @@ const Title = styled.div`
 const List = () => {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [refreshInterval, setRefreshInterval] = useState(60000);
+  // const [refreshInterval, setRefreshInterval] = useState(60000);
   const { showVideoOverlay } = useContext(VideoContext);
   const date =
     moment().hours() < 18
@@ -43,7 +43,7 @@ const List = () => {
       : moment().format("YYYYMMDD");
 
   const fetchData = () => {
-    console.log("fetching...");
+    // console.log("fetching...");
     setLoading(true);
     api.match
       .fetch(date)
@@ -63,6 +63,7 @@ const List = () => {
       return () => clearInterval(interval);
     }*/
     fetchData();
+    // eslint-disable-next-line
   }, []);
   // }, [refreshInterval]);
 
