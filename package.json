@@ -36,7 +36,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "http://localhost:1337/v1",
+  "proxy": "https://whispering-badlands-84321.herokuapp.com/v1",
   "browserslist": {
     "production": [
       ">0.2%",
