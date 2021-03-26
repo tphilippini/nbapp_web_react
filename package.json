@@ -42,7 +42,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "https://whispering-badlands-84321.herokuapp.com/v1",
+  "homepage": "https://app.tphilippini.fr",
   "browserslist": {
     "production": [
       ">0.2%",

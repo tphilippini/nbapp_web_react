@@ -114,7 +114,10 @@ export default {
   },
 
   match: {
-    fetch: (date) => axios.get(`/matches/${date}`).then((res) => res.data),
+    fetch: (date) =>
+      axios
+        .get(`${process.env.REACT_APP_API_HOST}/matches/${date}`)
+        .then((res) => res.data),
   },
 
   league: {
