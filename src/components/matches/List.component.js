@@ -38,12 +38,14 @@ const List = () => {
   // const [refreshInterval, setRefreshInterval] = useState(60000);
   const { showVideoOverlay } = useContext(VideoContext);
   const date =
-    moment().hours() < 18
+    moment().hours() < 16
       ? moment().subtract(1, "d").format("YYYYMMDD")
       : moment().format("YYYYMMDD");
 
+  console.log(date);
+
   const fetchData = () => {
-    // console.log("fetching...");
+    console.log("fetching...");
     setLoading(true);
     api.match
       .fetch(date)
@@ -57,6 +59,7 @@ const List = () => {
       });
   };
 
+  // Update fetchData only where game is live
   useEffect(() => {
     /*if (refreshInterval && refreshInterval > 0) {
       const interval = setInterval(fetchData, refreshInterval);

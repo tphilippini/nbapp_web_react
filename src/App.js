@@ -22,8 +22,6 @@ import GlobalStyle from "./styles/GlobalStyle.style";
 const App = (props) => {
   const [showOptionsOverlay, toggleOptionsOverlay] = useState(false);
 
-  console.log("hello");
-
   return (
     <React.Fragment>
       <Navbar
