@@ -1,11 +1,11 @@
 import React from "react";
 
 import LocaleProvider from "./locale.provider";
+import UserProvider from "./user.provider";
 // import LoadingProvider from "./loading.provider";
 // import VideoProvider from "./video.provider";
 // import Spinner from "../../components/helpers/Spinner.helpers";
 
-// import UserProvider from "./user.provider";
 
 const Store = ({ children }) => {
   return (
@@ -13,8 +13,7 @@ const Store = ({ children }) => {
       {/* <LoadingProvider> */}
       {/* <VideoProvider> */}
       {/* <Spinner /> */}
-      {/* <UserProvider>{children}</UserProvider> */}
-      {children}
+      <UserProvider>{children}</UserProvider>
       {/* </VideoProvider> */}
       {/* </LoadingProvider> */}
     </LocaleProvider>

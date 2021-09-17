@@ -7,14 +7,16 @@ const GuestRoute = ({ component: Component, ...rest }) => {
 
   return (
     <Route
-      render={(props) =>
-        user && user.email ? (
-          <Redirect to="/dashboard" />
-        ) : (
-          <Component {...props} />
-        )
-      }
       {...rest}
+      render={(props) => {
+        if (user) {
+          return (
+            <Redirect to={{ pathname: "/dashboard", state: { from: props.location } }} />
+            );
+          } else {
+          return <Component {...props} />;
+        }
+      }}
     />
   );
 };

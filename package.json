@@ -43,6 +43,7 @@
     "extends": "react-app"
   },
   "homepage": "https://app.tphilippini.fr",
+  "proxy": "http://localhost:1337/v1/",
   "browserslist": {
     "production": [
       ">0.2%",

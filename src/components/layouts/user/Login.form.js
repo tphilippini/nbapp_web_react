@@ -21,7 +21,7 @@ const LoginForm = ({ intl, history }) => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   const onChange = (e) =>
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -36,7 +36,6 @@ const LoginForm = ({ intl, history }) => {
       setLoading(false);
       if (result?.email) {
         setUser(result);
-        history.push("/dashboard");
       } else if (result?.message) setErrors(result);
       else {
         setErrors({ message: "Identifiant invalide" });

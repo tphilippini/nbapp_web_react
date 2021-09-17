@@ -1,17 +1,20 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import UserContext from "../../stores/contexts/user.context";
+import Loading from "../../screens/Loading.screen";
 
-const UserRoute = ({ component: Component, ...rest }) => {
-  const { user } = useContext(UserContext);
+const UserRoute = (props) => {
+  const { component: Component, ...rest } = props;
+  const { user, isLoading } = useContext(UserContext);
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        user && !!user.email ? <Component {...props} /> : <Redirect to="/" />
-      }
-    />
-  );
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (user) {
+    return <Route {...rest} render={(props) => <Component {...props} />} />;
+  }
+
+  return <Redirect to={{ pathname: '/', state: { from: props.location } }} />;
 };
 export default UserRoute;

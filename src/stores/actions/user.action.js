@@ -62,8 +62,8 @@ export const signup = async (data) => {
 };
 
 export const fetchUser = async () => {
-  // const result = await api.user.fetchCurrentUser();
-  // if (result.success) return result.data[0];
+  const result = await api.user.fetchCurrentUser();
+  if (result.success) return result.data[0];
   return null;
 };
 

@@ -110,7 +110,7 @@ export default {
       axios
         .get("/users/current")
         .then((res) => res.data)
-        .catch((err) => err),
+        .catch((err) => err.response.data),
   },
 
   match: {
