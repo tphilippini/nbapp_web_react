@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Navbar from "./components/navbar/Navbar.component";
@@ -30,7 +30,7 @@ const App = (props) => {
         {...props}
       />
       <Switch>
-        <Route path='/' exact component={Landing} />
+        <GuestRoute path='/' exact component={Landing} />
         <GuestRoute path='/login' exact component={Login} />
         <UserRoute path='/dashboard' exact component={Dashboard} />
 

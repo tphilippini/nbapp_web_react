@@ -1,4 +1,5 @@
 import axios from "axios";
+import { refreshToken, logout } from "./user.action";
 
 export default {
   user: {
@@ -13,6 +14,51 @@ export default {
         .then((res) => res.data)
         .catch((err) => err.response.data),
 
+    refreshToken: (credentials) =>
+      axios
+        .post("/auth/token", {
+          client_id: credentials.client_id,
+          refresh_token: credentials.refresh_token,
+          grant_type: "refresh_token",
+          user_type: "user",
+        })
+        .then((res) => res.data)
+        .catch((err) => err.response.data),
+
+    verifyExpToken: (data) => {
+      axios.interceptors.response.use(
+        (res) => {
+          return res;
+        },
+        async (error) => {
+          const originalConfig = error.config;
+
+          if (error.response) {
+            if (error.response.status === 401 && !originalConfig._retry) {
+              originalConfig._retry = true;
+              try {
+                const isTokenRefreshed = await refreshToken({
+                  client_id: data.client_id,
+                  refresh_token: data.refresh_token,
+                });
+                if (!isTokenRefreshed) logout();
+
+                return axios(originalConfig);
+              } catch (_error) {
+                if (_error.response && _error.response.data) {
+                  return Promise.reject(_error.response.data);
+                }
+
+                return Promise.reject(_error);
+              }
+            }
+          }
+
+          return Promise.reject(error.response.data);
+        }
+      );
+    },
+
     loginSocial: (token, method) =>
       axios
         .post(`/auth/${method}/token`, {
@@ -22,24 +68,6 @@ export default {
         })
         .then((res) => res.data)
         .catch((err) => err.response.data),
-
-    loginFacebook: (token) =>
-      axios
-        .post("/auth/facebook/token", {
-          access_token: token,
-          grant_type: "facebook",
-          user_type: "user",
-        })
-        .then((res) => res.data.data[0]),
-
-    loginGoogle: (token) =>
-      axios
-        .post("/auth/google/token", {
-          access_token: token,
-          grant_type: "google",
-          user_type: "user",
-        })
-        .then((res) => res.data.data[0]),
 
     forgot: (user) =>
       axios

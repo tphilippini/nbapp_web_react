@@ -5,8 +5,13 @@ export const login = async (credentials) => {
   const result = await api.user.login(credentials);
   if (result.success) {
     const user = result.data[0];
-    localStorage.USER_DATA = user.access_token;
-    setAuthorizationHeader(localStorage.USER_DATA);
+    const storage = {
+      access_token: user.access_token,
+      client_id: user.client_id,
+      refresh_token: user.refresh_token,
+    };
+    localStorage.setItem("USER_DATA", JSON.stringify(storage));
+    setAuthorizationHeader(JSON.parse(localStorage.getItem("USER_DATA")));
     return {
       uuid: user.uuid,
       email: user.email,
@@ -23,8 +28,13 @@ export const loginSocial = async (token, method) => {
   const result = await api.user.loginSocial(token, method);
   if (result.success) {
     const user = result.data[0];
-    localStorage.USER_DATA = user.access_token;
-    setAuthorizationHeader(localStorage.USER_DATA);
+    const storage = {
+      access_token: user.access_token,
+      client_id: user.client_id,
+      refresh_token: user.refresh_token,
+    };
+    localStorage.setItem("USER_DATA", JSON.stringify(storage));
+    setAuthorizationHeader(JSON.parse(localStorage.getItem("USER_DATA")));
     return {
       uuid: user.uuid,
       email: user.email,
@@ -51,11 +61,33 @@ export const reset = (data) => api.user.reset(data);
 
 export const validateToken = (token) => api.user.validateToken(token);
 
+export const verifyExpToken = (token) => api.user.verifyExpToken(token);
+
+export const refreshToken = async (credentials) => {
+  const result = await api.user.refreshToken(credentials);
+  if (result.success) {
+    const storage = {
+      access_token: result.data[0].access_token,
+      client_id: result.data[0].client_id,
+      refresh_token: result.data[0].refresh_token,
+    };
+    localStorage.setItem("USER_DATA", JSON.stringify(storage));
+    setAuthorizationHeader(JSON.parse(localStorage.getItem("USER_DATA")));
+    return true;
+  }
+  return false;
+};
+
 export const signup = async (data) => {
   const result = await api.user.signup(data);
   if (result.success) {
-    localStorage.USER_DATA = result.data[0].access_token;
-    setAuthorizationHeader(localStorage.USER_DATA);
+    const storage = {
+      access_token: result.data[0].access_token,
+      client_id: result.data[0].client_id,
+      refresh_token: result.data[0].refresh_token,
+    };
+    localStorage.setItem("USER_DATA", JSON.stringify(storage));
+    setAuthorizationHeader(JSON.parse(localStorage.getItem("USER_DATA")));
     return result.data[0];
   }
   return result.errors[0];
