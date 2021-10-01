@@ -3,7 +3,7 @@ import UserContext from "../contexts/user.context";
 // import LoadingContext from "../contexts/loading.context";
 
 import setAuthorizationHeader from "../../utils/setAuthorizationHeader.utils";
-import { fetchUser, verifyExpToken } from "../actions/user.action";
+import { fetchUser } from "../actions/user.action";
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -18,7 +18,6 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     if (localStorage.getItem("USER_DATA")) {
       const userData = JSON.parse(localStorage.getItem("USER_DATA"));
-      verifyExpToken(userData);
       setAuthorizationHeader(userData);
     }
 

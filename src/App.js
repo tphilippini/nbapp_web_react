@@ -30,7 +30,7 @@ const App = (props) => {
         {...props}
       />
       <Switch>
-        <GuestRoute path='/' exact component={Landing} />
+        <Route path='/' exact component={Landing} />
         <GuestRoute path='/login' exact component={Login} />
         <UserRoute path='/dashboard' exact component={Dashboard} />
 

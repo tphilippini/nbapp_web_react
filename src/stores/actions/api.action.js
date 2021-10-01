@@ -1,5 +1,30 @@
 import axios from "axios";
-import { refreshToken, logout } from "./user.action";
+import jwtDecode from "jwt-decode";
+import { refreshToken } from "./user.action";
+// Need to create Axios instance, to avoid infinite loop
+// To refresh token
+const AXIOS = axios.create();
+
+axios.interceptors.request.use(
+  async (config) => {
+    let currentDate = new Date();
+    const userData = JSON.parse(localStorage.getItem("USER_DATA"));
+    const decodeToken = jwtDecode(userData.access_token);
+    if (decodeToken.exp * 1000 < currentDate.getTime()) {
+      const newAccessToken = await refreshToken({
+        client_id: userData.client_id,
+        refresh_token: userData.refresh_token,
+      });
+      if (newAccessToken) {
+        config.header["authorization"] = `Bearer ${newAccessToken}`;
+      }
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export default {
   user: {
@@ -15,49 +40,14 @@ export default {
         .catch((err) => err.response.data),
 
     refreshToken: (credentials) =>
-      axios
-        .post("/auth/token", {
-          client_id: credentials.client_id,
-          refresh_token: credentials.refresh_token,
-          grant_type: "refresh_token",
-          user_type: "user",
-        })
+      AXIOS.post("/auth/token", {
+        client_id: credentials.client_id,
+        refresh_token: credentials.refresh_token,
+        grant_type: "refresh_token",
+        user_type: "user",
+      })
         .then((res) => res.data)
         .catch((err) => err.response.data),
-
-    verifyExpToken: (data) => {
-      axios.interceptors.response.use(
-        (res) => {
-          return res;
-        },
-        async (error) => {
-          const originalConfig = error.config;
-
-          if (error.response) {
-            if (error.response.status === 401 && !originalConfig._retry) {
-              originalConfig._retry = true;
-              try {
-                const isTokenRefreshed = await refreshToken({
-                  client_id: data.client_id,
-                  refresh_token: data.refresh_token,
-                });
-                if (!isTokenRefreshed) logout();
-
-                return axios(originalConfig);
-              } catch (_error) {
-                if (_error.response && _error.response.data) {
-                  return Promise.reject(_error.response.data);
-                }
-
-                return Promise.reject(_error);
-              }
-            }
-          }
-
-          return Promise.reject(error.response.data);
-        }
-      );
-    },
 
     loginSocial: (token, method) =>
       axios

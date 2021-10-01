@@ -61,8 +61,6 @@ export const reset = (data) => api.user.reset(data);
 
 export const validateToken = (token) => api.user.validateToken(token);
 
-export const verifyExpToken = (token) => api.user.verifyExpToken(token);
-
 export const refreshToken = async (credentials) => {
   const result = await api.user.refreshToken(credentials);
   if (result.success) {
@@ -72,10 +70,10 @@ export const refreshToken = async (credentials) => {
       refresh_token: result.data[0].refresh_token,
     };
     localStorage.setItem("USER_DATA", JSON.stringify(storage));
-    setAuthorizationHeader(JSON.parse(localStorage.getItem("USER_DATA")));
-    return true;
+    setAuthorizationHeader(storage);
+    return storage.access_token;
   }
-  return false;
+  return null;
 };
 
 export const signup = async (data) => {
@@ -87,7 +85,7 @@ export const signup = async (data) => {
       refresh_token: result.data[0].refresh_token,
     };
     localStorage.setItem("USER_DATA", JSON.stringify(storage));
-    setAuthorizationHeader(JSON.parse(localStorage.getItem("USER_DATA")));
+    setAuthorizationHeader(storage);
     return result.data[0];
   }
   return result.errors[0];
