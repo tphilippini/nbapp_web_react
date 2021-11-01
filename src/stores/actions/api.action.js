@@ -2,7 +2,9 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { refreshToken } from "./user.action";
 
-// const AXIOS = axios.create();
+const instance = axios.create({
+  baseURL: process.env.REACT_APP_API_HOST,
+});
 
 axios.interceptors.request.use(
   async (config) => {
@@ -30,7 +32,7 @@ axios.interceptors.request.use(
 export default {
   user: {
     login: (credentials) =>
-      axios
+      instance
         .post("/auth/token", {
           email: credentials.email,
           password: credentials.password,
@@ -55,7 +57,7 @@ export default {
     },
 
     loginSocial: (token, method) =>
-      axios
+      instance
         .post(`/auth/${method}/token`, {
           access_token: token,
           grant_type: method,
@@ -65,7 +67,7 @@ export default {
         .catch((err) => err.response.data),
 
     forgot: (user) =>
-      axios
+      instance
         .post("/auth/forgot", {
           email: user.email,
           user_type: "user",
@@ -75,7 +77,7 @@ export default {
         .catch((err) => err.response.data),
 
     reset: (user) =>
-      axios
+      instance
         .post("/auth/reset", {
           token: user.token,
           password: user.password,
@@ -86,7 +88,7 @@ export default {
         .then((res) => res.data),
 
     validateToken: (token) =>
-      axios
+      instance
         .post("/auth/validate", {
           token,
           user_type: "user",
@@ -95,13 +97,13 @@ export default {
         .then((res) => res.data),
 
     signup: (user) =>
-      axios
+      instance
         .post("/users", { ...user })
         .then((res) => res.data)
         .catch((err) => err.response.data),
 
     patch: (user, type) =>
-      axios
+      instance
         .patch(`/users/${user.uuid}`, {
           ...user,
           grant_type: type,
@@ -111,7 +113,7 @@ export default {
         .catch((err) => err.response.data),
 
     linkSocial: (token, method) =>
-      axios
+      instance
         .post(`/users/${method}/link`, {
           access_token: token,
           grant_type: "link",
@@ -121,7 +123,7 @@ export default {
         .catch((err) => err.response.data),
 
     unlinkSocial: (method) =>
-      axios
+      instance
         .post(`/users/${method}/unlink`, {
           grant_type: "unlink",
           user_type: "user",
@@ -130,7 +132,7 @@ export default {
         .catch((err) => err.response.data),
 
     fetchCurrentUser: () =>
-      axios
+      instance
         .get("/users/current")
         .then((res) => res.data)
         .catch((err) => err.response.data),
@@ -138,15 +140,16 @@ export default {
 
   match: {
     fetch: (date) =>
-      axios
+      instance
         .get(`/matches/${date}`)
-        .then((res) => res.data),
+        .then((res) => res.data)
+        .catch((err) => err.response.data),
   },
 
   league: {
-    fetch: (uuid) => axios.get(`/leagues/${uuid}`).then((res) => res.data),
+    fetch: (uuid) => instance.get(`/leagues/${uuid}`).then((res) => res.data),
 
     post: (league) =>
-      axios.post("/leagues", { ...league }).then((res) => res.data.data[0]),
+      instance.post("/leagues", { ...league }).then((res) => res.data.data[0]),
   },
 };
