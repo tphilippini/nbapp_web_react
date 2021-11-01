@@ -4,7 +4,7 @@
 - Using Styled-Components for style.
 - Running with NBA App Backend API
 
-### [Demo](https://app.tphilippini.fr)
+### [Demo](https://nbapp-app.herokuapp.com)
 
 ## Authors
 
