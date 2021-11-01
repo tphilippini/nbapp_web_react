@@ -42,10 +42,7 @@ const List = () => {
       ? moment().subtract(1, "d").format("YYYYMMDD")
       : moment().format("YYYYMMDD");
 
-  console.log(date);
-
   const fetchData = () => {
-    console.log("fetching...");
     setLoading(true);
     api.match
       .fetch(date)

@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { animated } from "react-spring";
-// import { FormattedMessage } from "react-intl";
+import { FormattedMessage } from "react-intl";
 // import Avatar from "react-avatar";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-// import UserContext from "../../stores/contexts/user.context";
+import UserContext from "../../stores/contexts/user.context";
 // import { logout } from "../../stores/actions/user.action";
 
 // import Hamburger from "./Hamburger.component";
@@ -127,7 +127,7 @@ const Title = styled.span`
 // `;
 
 const Navbar = (props) => {
-  // const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   // const handleClick = () => {
   //   props.toggleOptionsOverlay(!props.showOptionsOverlay);
@@ -137,21 +137,20 @@ const Navbar = (props) => {
     <NavBar>
       <MenuWrapper className={props.showOptionsOverlay ? "active" : ""}>
         <LogoWrapper>
-          {/* <Link to={user && user.email ? "/dashboard" : "/"}> */}
-          <Title>
-            {/* {user && user.email ? (
+          <Link to={user && user.email ? "/dashboard" : "/"}>
+            <Title>
+              {user && user.email ? (
                 <FormattedMessage id='nav.dashboard' default='Dashboard' />
               ) : (
                 "NBA APPLICATION"
-              )} */}
-            NBA APPLICATION
-          </Title>
-          {/* </Link> */}
+              )}
+            </Title>
+          </Link>
         </LogoWrapper>
 
         {/* <NavItem className="item">
-              <ThemeSelect />
-            </NavItem> */}
+          <ThemeSelect />
+        </NavItem> */}
 
         {/* <NavItem className="item">
               <Link to="/">Home</Link>
@@ -193,15 +192,17 @@ const Navbar = (props) => {
           </>
         ) : (
           <>
-            { <NavItemButton show={props.showOptionsOverlay ? "1" : "0"}>
-              <ButtonLink primary="true" rounded="true" to="/login">
-                <FormattedMessage id="account.login" default="Login" />
-              </ButtonLink>
-            </NavItemButton>}
+            {
+              <NavItemButton show={props.showOptionsOverlay ? "1" : "0"}>
+                <ButtonLink primary='true' rounded='true' to='/login'>
+                  <FormattedMessage id='account.login' default='Login' />
+                </ButtonLink>
+              </NavItemButton>
+            }
           </>
-        )}
+        )} */}
 
-        <HamburgerWrapper>
+        {/* <HamburgerWrapper>
           <Hamburger handleClick={handleClick} />
         </HamburgerWrapper> */}
       </MenuWrapper>

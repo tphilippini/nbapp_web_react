@@ -1,22 +1,23 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { refreshToken } from "./user.action";
-// Need to create Axios instance, to avoid infinite loop
-// To refresh token
-const AXIOS = axios.create();
+
+// const AXIOS = axios.create();
 
 axios.interceptors.request.use(
   async (config) => {
     let currentDate = new Date();
     const userData = JSON.parse(localStorage.getItem("USER_DATA"));
-    const decodeToken = jwtDecode(userData.access_token);
-    if (decodeToken.exp * 1000 < currentDate.getTime()) {
-      const newAccessToken = await refreshToken({
-        client_id: userData.client_id,
-        refresh_token: userData.refresh_token,
-      });
-      if (newAccessToken) {
-        config.header["authorization"] = `Bearer ${newAccessToken}`;
+    if (userData) {
+      const decodeToken = jwtDecode(userData.access_token);
+      if (decodeToken.exp * 1000 < currentDate.getTime()) {
+        const newAccessToken = await refreshToken({
+          client_id: userData.client_id,
+          refresh_token: userData.refresh_token,
+        });
+        if (newAccessToken) {
+          config.header["authorization"] = `Bearer ${newAccessToken}`;
+        }
       }
     }
     return config;
@@ -39,7 +40,10 @@ export default {
         .then((res) => res.data)
         .catch((err) => err.response.data),
 
-    refreshToken: (credentials) =>
+    refreshToken: (credentials) => {
+      // Need to create Axios instance, to avoid infinite loop
+      // To refresh token
+      const AXIOS = axios.create();
       AXIOS.post("/auth/token", {
         client_id: credentials.client_id,
         refresh_token: credentials.refresh_token,
@@ -47,7 +51,8 @@ export default {
         user_type: "user",
       })
         .then((res) => res.data)
-        .catch((err) => err.response.data),
+        .catch((err) => err.response.data);
+    },
 
     loginSocial: (token, method) =>
       axios
@@ -134,7 +139,7 @@ export default {
   match: {
     fetch: (date) =>
       axios
-        .get(`${process.env.REACT_APP_API_HOST}/matches/${date}`)
+        .get(`/matches/${date}`)
         .then((res) => res.data),
   },
 

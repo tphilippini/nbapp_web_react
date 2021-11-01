@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 // import styled from "styled-components";
 // import { FormattedMessage } from "react-intl";
@@ -8,8 +8,8 @@ import { withRouter } from "react-router-dom";
 // import { Transition } from "react-spring/renderprops";
 
 // import VideoContext from "../stores/contexts/video.context";
-import UserContext from "../stores/contexts/user.context";
-// import ListMatches from "../components/matches/List.component";
+// import UserContext from "../stores/contexts/user.context";
+import ListMatches from "../components/matches/List.component";
 // import ListLeagues from "../components/leagues/List.component";
 // import VideoOverlay from "../components/matches/VideoOverlay.component";
 
@@ -24,7 +24,7 @@ import Container from "../components/elements/Container.component";
 // `;
 
 const Dashboard = (props) => {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
   // const { showVideoOverlay } = useContext(VideoContext);
 
   return (
@@ -79,8 +79,8 @@ const Dashboard = (props) => {
                 <Title>Résultats</Title>
               </Column>
             </Columns> */}
-        {/* <ListMatches /> */}
-        <div>Hello {user && user.email}</div>
+        {/* <div>Hello {user && user.email}</div> */}
+        <ListMatches />
         {/* </Column>
         </Columns> */}
       </Container>
