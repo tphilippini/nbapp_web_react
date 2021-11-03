@@ -30,9 +30,8 @@
     </noscript>
     <div id="root"></div>
     <script>
-      var host = "nbapp-app.heroku.com";
-      if ((host == window.location.host) && (window.location.protocol != "https:")){
-        window.location.protocol = "https";
+      if (window.location.protocol == 'http:') {
+        window.location.href = window.location.href.replace('http:', 'https:');
       }
     </script>
   </body>
