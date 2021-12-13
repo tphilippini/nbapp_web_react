@@ -14,7 +14,7 @@ const Store = ({ children }) => {
       {/* <VideoProvider> */}
       {/* <Spinner /> */}
       {/* <UserProvider>{children}</UserProvider> */}
-      {children}
+        {children}
       {/* </VideoProvider> */}
       {/* </LoadingProvider> */}
     </LocaleProvider>

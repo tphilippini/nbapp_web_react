@@ -36,6 +36,7 @@ const VideoRow = styled.div`
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   display: flex;
   flex-wrap: nowrap;
+  gap: 5px;
   overflow-x: auto;
   background-color: ${props => props.theme.background};
   align-items: center;
